@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-shadow: border-box;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+}
+
+.App {
+    width: 800px;
+}
+
+.todo {
+    height: 50px;
+    display: flex;
+    padding: 15 px;
+    border: 2px solid teal;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+
+}
