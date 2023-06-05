@@ -13,10 +13,38 @@ function App() {
     setTodos([...todos, newTodo]);
   };
 
+  const removeTodo = (todo) => {
+    console.log(todo);
+    setTodos(todos.filter((t) => t.id !== todo.id));
+  };
+
+  const editTodo = (edittodo) => {
+    const editTitle = prompt("tytytry");
+
+    console.log(edittodo);
+
+    todos.find((t) => {
+      if (t.id === edittodo.id) {
+        return (t.title = editTitle);
+      }
+    });
+
+    setTodos([...todos]);
+  };
+
   return (
     <div className="App">
       <TodoForm create={createTodo} />
-      <TodoList todos={todos} title="sjaflnlasf" />
+      {todos.length !== 0 ? (
+        <TodoList
+          edit={editTodo}
+          remove={removeTodo}
+          todos={todos}
+          title="Список справ !"
+        />
+      ) : (
+        <h1 style={{ textAlign: "center" }}>Список порожній !</h1>
+      )}
     </div>
   );
 }
