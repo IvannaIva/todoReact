@@ -35,16 +35,13 @@ function App() {
   return (
     <div className="App">
       <TodoForm create={createTodo} />
-      {todos.length !== 0 ? (
-        <TodoList
-          edit={editTodo}
-          remove={removeTodo}
-          todos={todos}
-          title="Список справ !"
-        />
-      ) : (
-        <h1 style={{ textAlign: "center" }}>Список порожній !</h1>
-      )}
+
+      <TodoList
+        edit={editTodo}
+        remove={removeTodo}
+        todos={todos}
+        title="Список справ !"
+      />
     </div>
   );
 }
