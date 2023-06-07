@@ -45,5 +45,8 @@
   -webkit-box-shadow: 5px 2px 15px -7px #000000; 
 box-shadow: 5px 2px 15px -7px #000000;
 z-index: 1000;
+
+padding: 10px;
 }
+
 

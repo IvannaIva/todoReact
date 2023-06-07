@@ -3,6 +3,7 @@ import { useState } from "react";
 import MyButton from "./UI/button/MyButton";
 import { TbDotsVertical } from "react-icons/tb";
 import MyModal from "./MyModal/MyModal";
+import CustomButton from './UI/button/CustomButton';
 
 export const TodoItem = (props) => {
   let [dotsOpen, setDotsOpen] = useState(false);
@@ -23,10 +24,11 @@ export const TodoItem = (props) => {
         {dotsOpen && (
           <div className="tree-dots">
            
-              <MyButton onClick={() => props.remove(props.todo)}>Del</MyButton>
-              <MyButton onClick={() => props.edit(props.todo)}>Edit</MyButton>
-
-              <MyButton onClick={() => setModal(true)}>Attach Label</MyButton>
+              <CustomButton size='150px' onClick={() => props.remove(props.todo)}>Del</CustomButton>
+              <div style={{ marginBottom: "10px" }}></div>
+              <CustomButton size='150px' onClick={() => props.edit(props.todo)}>Edit</CustomButton>
+              <div style={{ marginBottom: "10px" }}></div>
+              <CustomButton  size='150px' onClick={() => setModal(true)}>Attach Label</CustomButton>
 
               <MyModal visible={modal} setVisible={setModal}>
                 {" "}
