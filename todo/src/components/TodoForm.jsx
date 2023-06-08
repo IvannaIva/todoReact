@@ -15,7 +15,7 @@ export default function TodoForm({ create }) {
     };
 
     create(newTodo);
-    setTodo({ title: "" });
+   // setTodo({ title: "" });
   };
 
   return (

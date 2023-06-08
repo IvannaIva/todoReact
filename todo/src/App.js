@@ -14,8 +14,10 @@ function App() {
   };
 
   const removeTodo = (todo) => {
-    console.log(todo);
-    setTodos(todos.filter((t) => t.id !== todo.id));
+    setTodos((prevState) => {
+      const newArr = [...prevState].filter((el) => el.id !== todo.id);
+      return newArr;
+    });
   };
 
   const editTodo = (edittodo) => {
@@ -23,13 +25,12 @@ function App() {
 
     console.log(edittodo);
 
-    todos.find((t) => {
-      if (t.id === edittodo.id) {
-        return (t.title = editTitle);
-      }
+    setTodos((prevState) => {
+      const newArr = [...prevState].map((el) =>
+        el.id === edittodo.id ? { ...el, title: editTitle } : el
+      );
+      return newArr;
     });
-
-    setTodos([...todos]);
   };
 
   return (

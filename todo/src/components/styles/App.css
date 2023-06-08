@@ -41,12 +41,30 @@
 
   width: 150px;
   min-height: 100px;
-  background: #faf6f6;
-  -webkit-box-shadow: 5px 2px 15px -7px #000000; 
-box-shadow: 5px 2px 15px -7px #000000;
-z-index: 1000;
+  background: #770808;
+  -webkit-box-shadow: 5px 2px 15px -7px #000000;
+  box-shadow: 5px 2px 15px -7px #000000;
+  z-index: 1000;
 
-padding: 10px;
+  padding: 10px;
 }
 
+/* .tree-dots-content {
+  top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+} */
 
+/* .myModalContent {
+  padding: 25px;
+  background: white;
+  border-radius: 16px;
+  min-width: 250px;
+  }
+  
+  .myModal.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  } */
