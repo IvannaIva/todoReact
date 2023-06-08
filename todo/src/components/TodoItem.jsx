@@ -33,6 +33,7 @@ export const TodoItem = (props) => {
         {dotsOpen && (
           
           <div className="tree-dots">
+            <div className="tree-dots-content">
             <CustomButton size="150px" onClick={() => props.remove(props.todo)}>
               Del
             </CustomButton>
@@ -49,13 +50,15 @@ export const TodoItem = (props) => {
               Attach Label
             </CustomButton>
 
-            <MyModal visible={modal} setVisible={setModal}>
+           
+          </div>
+          </div>
+        )}
+         <MyModal visible={modal} setVisible={setModal}>
               {" "}
             </MyModal>
-          </div>
-        
-        )}
       </div>
+      
     </div>
   );
 };
