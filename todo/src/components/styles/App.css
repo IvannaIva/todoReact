@@ -59,3 +59,12 @@
 .labButtonStyle {
   padding-top: 10px;
 }
+
+.selected-label{
+
+
+  border-radius: 5px;
+  background: rgb(228, 228, 235);
+
+  
+}

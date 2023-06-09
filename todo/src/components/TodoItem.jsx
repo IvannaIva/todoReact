@@ -4,16 +4,55 @@ import { TbDotsVertical } from "react-icons/tb";
 import MyModal from "./MyModal/MyModal";
 import CustomButton from "./UI/button/CustomButton";
 import LabelButtons from "./LabelButtons";
+import SelectedLabel from "./SelectedLabel";
+
+// const handleLabelClick = (label) => {
+
+//   if (selectedLabels.includes(label)) {
+
+//   // Видалення лейблу, якщо він вже вибраний
+
+//   const updatedLabels = selectedLabels.filter((selectedLabel) => selectedLabel !== label);
+//         setSelectedLabels(updatedLabels);
+//       } else {
+
+//   // Додавання лейблу, якщо він не вибраний
+
+//   const updatedLabels = [...selectedLabels, label];
+
+//   setSelectedLabels(updatedLabels);
+//       }
+//     };
 
 export const TodoItem = (props) => {
   const [dotsOpen, setDotsOpen] = useState(false);
   const [modal, setModal] = useState(false);
 
-  const [selectedLabel, setSelectedLabel] = useState(null);
+  const [selectedLabel, setSelectedLabel] = useState([]);
 
-  const onSelectLabel = (label) => {
-    setSelectedLabel(label);
-  };
+
+
+const handleLabelClick = (label) => {
+
+  if (selectedLabel.includes(label)) {
+
+  // Видалення лейблу, якщо він вже вибраний
+
+  const updatedLabels = selectedLabel.filter((selectedLabel) => selectedLabel !== label);
+        setSelectedLabel(updatedLabels);
+      } else {
+
+  // Додавання лейблу, якщо він не вибраний
+
+  const updatedLabels = [...selectedLabel, label];
+
+  setSelectedLabel(updatedLabels);
+      }
+    };
+
+  // const onSelectLabel = (label) => {
+  //   setSelectedLabel(label);
+  // };
 
   const closeDotsOpen = () => {
     setDotsOpen(false);
@@ -28,13 +67,15 @@ export const TodoItem = (props) => {
     <div className="todo">
       <div className="todo__content">
         <div>
-          {props.number}. {props.todo.title} {props.todo.label}
+          {props.number}. {props.todo.title}
         </div>
       </div>
 
       {selectedLabel && (
-        <div className="selected-label">Selected Label: {selectedLabel}</div>
+        <div className="selected-label">{selectedLabel}</div>
       )}
+{/* 
+ {selectedLabel && <SelectedLabel selectedLabel={selectedLabel}/>} */}
 
       <div className="todo__btns">
         <TbDotsVertical
@@ -70,7 +111,7 @@ export const TodoItem = (props) => {
         )}
       </div>
       <MyModal visible={modal} setVisible={setModal}>
-        <LabelButtons onSelectLabel={onSelectLabel} />
+        <LabelButtons handleLabelClick={handleLabelClick} />
       </MyModal>
     </div>
   );

@@ -1,14 +1,13 @@
 import React from "react";
 import LabButton from "./UI/button/LabButton";
-import { useState } from "react";
 
-const LabelButtons = ({ onSelectLabel, ...props }) => {
+const LabelButtons = ({ handleLabelClick, ...props }) => {
   return (
     <div className="labelButton-content">
       <LabButton
         size="150px"
         borderRadius="10px"
-        onClick={() => onSelectLabel("Chores")}
+        onClick={() => handleLabelClick("Chores")}
       >
         {" "}
         Chores{" "}
@@ -16,7 +15,7 @@ const LabelButtons = ({ onSelectLabel, ...props }) => {
       <LabButton
         size="150px"
         borderRadius="10px"
-        onClick={() => onSelectLabel("Shopping")}
+        onClick={() => handleLabelClick("Shopping")}
       >
         {" "}
         Shopping{" "}
@@ -24,7 +23,7 @@ const LabelButtons = ({ onSelectLabel, ...props }) => {
       <LabButton
         size="150px"
         borderRadius="10px"
-        onClick={() => onSelectLabel("Work")}
+        onClick={() => handleLabelClick("Work")}
       >
         Work{" "}
       </LabButton>

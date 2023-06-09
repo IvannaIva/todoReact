@@ -9,6 +9,8 @@ function App() {
     { id: 2, title: "sadadasdasda", labels: [] },
   ]);
 
+  
+  console.log(todos);
   const createTodo = (newTodo) => {
     setTodos([...todos, newTodo]);
   };
@@ -37,10 +39,13 @@ function App() {
     setTodos((prevState) => {
       const newArr = prevState.map((el) =>
         //el.id === todoId ? { ...el, labels: [...el.labels, label] } : el
-        el.id === todoId ? { ...el, labels: "mklm" } : el
+        el.id === todoId ? { ...el, labels: '' } : el
       );
+      
       return newArr;
+     
     });
+    
   };
 
   return (
