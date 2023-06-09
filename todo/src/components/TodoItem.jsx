@@ -3,62 +3,75 @@ import { useState } from "react";
 import { TbDotsVertical } from "react-icons/tb";
 import MyModal from "./MyModal/MyModal";
 import CustomButton from "./UI/button/CustomButton";
+import LabelButtons from "./LabelButtons";
 
 export const TodoItem = (props) => {
   const [dotsOpen, setDotsOpen] = useState(false);
   const [modal, setModal] = useState(false);
+
+  const [selectedLabel, setSelectedLabel] = useState(null);
+
+  const onSelectLabel = (label) => {
+    setSelectedLabel(label);
+  };
 
   const closeDotsOpen = () => {
     setDotsOpen(false);
   };
 
   const openModal = () => {
-   setModal(true);
+    setModal(true);
     closeDotsOpen(); // Додано для закриття меню dots при відкритті модального вікна
-   
   };
 
   return (
     <div className="todo">
       <div className="todo__content">
         <div>
-          {props.number}. {props.todo.title}
+          {props.number}. {props.todo.title} {props.todo.label}
         </div>
       </div>
+
+      {selectedLabel && (
+        <div className="selected-label">Selected Label: {selectedLabel}</div>
+      )}
+
       <div className="todo__btns">
         <TbDotsVertical
           onClick={() => setDotsOpen((prevState) => !prevState)}
           className="tree-dots-button"
         />
         {dotsOpen && (
-          
           <div className="tree-dots">
             <div className="tree-dots-content">
-            <CustomButton size="150px" onClick={() => props.remove(props.todo)}>
-              Del
-            </CustomButton>
+              <CustomButton
+                size="150px"
+                onClick={() => props.remove(props.todo)}
+              >
+                Del
+              </CustomButton>
 
-            <div style={{ marginBottom: "10px" }}></div>
-            <div className="deleteItem" onClick={() => setDotsOpen(false)}>
-              <CustomButton size="150px" onClick={() => props.edit(props.todo)}>
-                Edit
-              </CustomButton>{" "}
+              <div style={{ marginBottom: "10px" }}></div>
+              <div className="deleteItem" onClick={() => setDotsOpen(false)}>
+                <CustomButton
+                  size="150px"
+                  onClick={() => props.edit(props.todo)}
+                >
+                  Edit
+                </CustomButton>{" "}
+              </div>
+              <div style={{ marginBottom: "10px" }}></div>
+
+              <CustomButton size="150px" onClick={openModal}>
+                Attach Label
+              </CustomButton>
             </div>
-            <div style={{ marginBottom: "10px" }}></div>
-
-            <CustomButton size="150px"  onClick={openModal}>
-              Attach Label
-            </CustomButton>
-
-           
-          </div>
           </div>
         )}
-         <MyModal visible={modal} setVisible={setModal}>
-              {" "}
-            </MyModal>
       </div>
-      
+      <MyModal visible={modal} setVisible={setModal}>
+        <LabelButtons onSelectLabel={onSelectLabel} />
+      </MyModal>
     </div>
   );
 };
