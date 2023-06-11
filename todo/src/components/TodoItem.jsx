@@ -4,25 +4,8 @@ import { TbDotsVertical } from "react-icons/tb";
 import MyModal from "./MyModal/MyModal";
 import CustomButton from "./UI/button/CustomButton";
 import LabelButtons from "./LabelButtons";
-import SelectedLabel from "./SelectedLabel";
-
-// const handleLabelClick = (label) => {
-
-//   if (selectedLabels.includes(label)) {
-
-//   // Видалення лейблу, якщо він вже вибраний
-
-//   const updatedLabels = selectedLabels.filter((selectedLabel) => selectedLabel !== label);
-//         setSelectedLabels(updatedLabels);
-//       } else {
-
-//   // Додавання лейблу, якщо він не вибраний
-
-//   const updatedLabels = [...selectedLabels, label];
-
-//   setSelectedLabels(updatedLabels);
-//       }
-//     };
+import { useEffect } from "react";
+import useLocalStorage from "./useLocalStorage";
 
 export const TodoItem = (props) => {
   const [dotsOpen, setDotsOpen] = useState(false);
@@ -30,29 +13,23 @@ export const TodoItem = (props) => {
 
   const [selectedLabel, setSelectedLabel] = useState([]);
 
+  const handleLabelClick = (label) => {
+    if (selectedLabel.includes(label)) {
+      // Видалення лейблу, якщо він вже вибраний
 
+      const updatedLabels = selectedLabel.filter(
+        (selectedLabel) => selectedLabel !== label
+      );
+      setSelectedLabel(updatedLabels);
+    } else {
+      // Додавання лейблу, якщо він не вибраний
 
-const handleLabelClick = (label) => {
+      const updatedLabels = [...selectedLabel, label];
 
-  if (selectedLabel.includes(label)) {
-
-  // Видалення лейблу, якщо він вже вибраний
-
-  const updatedLabels = selectedLabel.filter((selectedLabel) => selectedLabel !== label);
-        setSelectedLabel(updatedLabels);
-      } else {
-
-  // Додавання лейблу, якщо він не вибраний
-
-  const updatedLabels = [...selectedLabel, label];
-
-  setSelectedLabel(updatedLabels);
-      }
-    };
-
-  // const onSelectLabel = (label) => {
-  //   setSelectedLabel(label);
-  // };
+      setSelectedLabel(updatedLabels);
+    }
+    setModal(false);
+  };
 
   const closeDotsOpen = () => {
     setDotsOpen(false);
@@ -71,10 +48,8 @@ const handleLabelClick = (label) => {
         </div>
       </div>
 
-      {selectedLabel && (
-        <div className="selected-label">{selectedLabel}</div>
-      )}
-{/* 
+      {selectedLabel && <div className="selected-label">{selectedLabel}</div>}
+      {/* 
  {selectedLabel && <SelectedLabel selectedLabel={selectedLabel}/>} */}
 
       <div className="todo__btns">

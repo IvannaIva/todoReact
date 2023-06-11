@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import MyInput from "./UI/input/MyInput";
 import MyButton from "./UI/button/MyButton";
+import { useEffect } from "react";
 
 export default function TodoForm({ create }) {
   const [todo, setTodo] = useState({ title: "" });
@@ -12,11 +13,16 @@ export default function TodoForm({ create }) {
     const newTodo = {
       ...todo,
       id: Date.now(),
+      labels: [],
     };
 
     create(newTodo);
-   // setTodo({ title: "" });
+    setTodo({ title: "" });
   };
+
+  // useEffect(() => {
+  //   localStorage.setItem("lab", JSON.stringify(todo));
+  // }, [todo]);
 
   return (
     <form>
