@@ -58,7 +58,13 @@
     padding-top: 10px;
 }
 
-.selected-label {
-    border-radius: 5px;
-    background: rgb(228, 228, 235);
+.slabel {
+    width: 70px;
+    height: 10px;
+    display: inline-flex;
+    border: 2px solid teal;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+    margin-right: 20px;
 }

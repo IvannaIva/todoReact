@@ -4,32 +4,25 @@ import { TbDotsVertical } from "react-icons/tb";
 import MyModal from "./MyModal/MyModal";
 import CustomButton from "./UI/button/CustomButton";
 import LabelButtons from "./LabelButtons";
-import { useEffect } from "react";
-import useLocalStorage from "./useLocalStorage";
+import SelectedLabel from "./SelectedLabel";
 
 export const TodoItem = ({ ...props }) => {
   const [dotsOpen, setDotsOpen] = useState(false);
   const [modal, setModal] = useState(false);
 
- // const [selectedLabel, setSelectedLabel] = useState([]);
-
   const handleLabelClick = (label) => {
-    // if (selectedLabel.includes(label)) {
-    //   // Видалення лейблу, якщо він вже вибраний
+    const arrLabels = props.todo.labels;
+    console.log("arrLabels", arrLabels);
 
-    //   const updatedLabels = selectedLabel.filter(
-    //     (selectedLabel) => selectedLabel !== label
-    //   );
-    //   setSelectedLabel(updatedLabels);
-    // } else {
-    //   // Додавання лейблу, якщо він не вибраний
+    const labelIndex = arrLabels.indexOf(label);
 
-    //   const updatedLabels = [...selectedLabel, label];
-
-    //   setSelectedLabel(updatedLabels);
-    // }
-    props.addLabel(label, props.todo)
-
+    if (labelIndex !== -1) {
+      arrLabels.splice(labelIndex, 1);
+      props.addLabel("", props.todo);
+    } else {
+      //  Додавання лейблу, якщо він не вибраний
+      props.addLabel(label, props.todo);
+    }
 
     setModal(false);
   };
@@ -51,11 +44,11 @@ export const TodoItem = ({ ...props }) => {
         </div>
       </div>
 
-      <div className="selected-label">{props.todo.labels}</div>
-
-      {/* {selectedLabel && <div className="selected-label">{selectedLabel}</div>} */}
-      {/* 
- {selectedLabel && <SelectedLabel selectedLabel={selectedLabel}/>} */}
+      <div className="selected-label">
+        {props.todo.labels.map((label) => (
+          <SelectedLabel label={label} key={label.id} />
+        ))}
+      </div>
 
       <div className="todo__btns">
         <TbDotsVertical
@@ -91,10 +84,7 @@ export const TodoItem = ({ ...props }) => {
         )}
       </div>
       <MyModal visible={modal} setVisible={setModal}>
-        <LabelButtons
-          // addLabel={addLabel}
-          handleLabelClick={handleLabelClick}
-        />
+        <LabelButtons handleLabelClick={handleLabelClick} />
       </MyModal>
     </div>
   );

@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
 
-function SelectedLabel({children, selectedLabel}) {
+export const SelectedLabel = ({ ...props }) => {
   return (
-    <div className="selected-label">{children}{selectedLabel}</div>
-  )
-}
+    <div className="slabel">
+      <div  className="slabelStyle">
+        {props.label}
+      </div>
+    </div>
+  );
+};
 
-export default SelectedLabel
+export default SelectedLabel;

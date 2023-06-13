@@ -38,7 +38,7 @@ function App() {
     setTodos((prevState) => {
 
       const newArr = prevState.map((el) =>
-        el.id === todo.id ? { ...el, labels: [...el.labels, label] } : el
+        el.id === todo.id ? { ...el, labels: [...el.labels, label]} : el
       );
 
       return newArr;
