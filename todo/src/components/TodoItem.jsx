@@ -7,27 +7,30 @@ import LabelButtons from "./LabelButtons";
 import { useEffect } from "react";
 import useLocalStorage from "./useLocalStorage";
 
-export const TodoItem = (props) => {
+export const TodoItem = ({ ...props }) => {
   const [dotsOpen, setDotsOpen] = useState(false);
   const [modal, setModal] = useState(false);
 
-  const [selectedLabel, setSelectedLabel] = useState([]);
+ // const [selectedLabel, setSelectedLabel] = useState([]);
 
   const handleLabelClick = (label) => {
-    if (selectedLabel.includes(label)) {
-      // Видалення лейблу, якщо він вже вибраний
+    // if (selectedLabel.includes(label)) {
+    //   // Видалення лейблу, якщо він вже вибраний
 
-      const updatedLabels = selectedLabel.filter(
-        (selectedLabel) => selectedLabel !== label
-      );
-      setSelectedLabel(updatedLabels);
-    } else {
-      // Додавання лейблу, якщо він не вибраний
+    //   const updatedLabels = selectedLabel.filter(
+    //     (selectedLabel) => selectedLabel !== label
+    //   );
+    //   setSelectedLabel(updatedLabels);
+    // } else {
+    //   // Додавання лейблу, якщо він не вибраний
 
-      const updatedLabels = [...selectedLabel, label];
+    //   const updatedLabels = [...selectedLabel, label];
 
-      setSelectedLabel(updatedLabels);
-    }
+    //   setSelectedLabel(updatedLabels);
+    // }
+    props.addLabel(label, props.todo)
+
+
     setModal(false);
   };
 
@@ -48,7 +51,9 @@ export const TodoItem = (props) => {
         </div>
       </div>
 
-      {selectedLabel && <div className="selected-label">{selectedLabel}</div>}
+      <div className="selected-label">{props.todo.labels}</div>
+
+      {/* {selectedLabel && <div className="selected-label">{selectedLabel}</div>} */}
       {/* 
  {selectedLabel && <SelectedLabel selectedLabel={selectedLabel}/>} */}
 
@@ -86,7 +91,10 @@ export const TodoItem = (props) => {
         )}
       </div>
       <MyModal visible={modal} setVisible={setModal}>
-        <LabelButtons handleLabelClick={handleLabelClick} />
+        <LabelButtons
+          // addLabel={addLabel}
+          handleLabelClick={handleLabelClick}
+        />
       </MyModal>
     </div>
   );

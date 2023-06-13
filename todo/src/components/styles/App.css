@@ -1,70 +1,64 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-shadow: border-box;
+    margin: 0;
+    padding: 0;
+    box-shadow: border-box;
 }
 
 #root {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .App {
-  width: 800px;
+    width: 800px;
 }
 
 .todo {
-  height: 50px;
-  display: flex;
-  padding: 15 px;
-  border: 2px solid teal;
-  margin-top: 15px;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 15px;
-  position: relative;
+    height: 50px;
+    display: flex;
+    padding: 15 px;
+    border: 2px solid teal;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+    position: relative;
 }
 
 .tree-dots-button {
-  cursor: pointer;
-  transition: color transform 500 ms ease;
+    cursor: pointer;
+    transition: color transform 500 ms ease;
 }
 
 .tree-dots-button:hover {
-  color: #8fd1a2;
-  transform: scale(1.5);
+    color: #8fd1a2;
+    transform: scale(1.5);
 }
 
 .tree-dots {
-  position: absolute;
-  top: 30px;
-
-  width: 150px;
-  min-height: 100px;
-  background: #e4e1e1;
-  -webkit-box-shadow: 5px 2px 15px -7px #000000;
-  box-shadow: 5px 2px 15px -7px #000000;
-  z-index: 1000;
-
-  padding: 10px;
+    position: absolute;
+    top: 30px;
+    width: 150px;
+    min-height: 100px;
+    background: #e4e1e1;
+    -webkit-box-shadow: 5px 2px 15px -7px #000000;
+    box-shadow: 5px 2px 15px -7px #000000;
+    z-index: 1000;
+    padding: 10px;
 }
 
 .labelButton-content {
-  border-radius: 16px;
-  display: grid;
-  justify-content: center;
-  align-items: center;
+    border-radius: 16px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
 .labButtonStyle {
-  padding-top: 10px;
+    padding-top: 10px;
 }
 
-.selected-label{
-
-
-  border-radius: 5px;
-  background: rgb(228, 228, 235);
-
-  
+.selected-label {
+    border-radius: 5px;
+    background: rgb(228, 228, 235);
 }

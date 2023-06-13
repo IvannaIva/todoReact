@@ -1,7 +1,7 @@
 import React from "react";
 import LabButton from "./UI/button/LabButton";
 
-const LabelButtons = ({ handleLabelClick }) => {
+const LabelButtons = ({ handleLabelClick}) => {
   return (
     <div className="labelButton-content">
       <LabButton
