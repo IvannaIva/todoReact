@@ -5,6 +5,7 @@ export const SelectedLabel = ({ ...props }) => {
     <div className="slabel">
       <div  className="slabelStyle">
         {props.label}
+       
       </div>
     </div>
   );

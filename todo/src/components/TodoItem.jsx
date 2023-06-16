@@ -37,8 +37,8 @@ export const TodoItem = ({ ...props }) => {
       </div>
 
       <div className="selected-label">
-        {props.todo.labels.map((label) => (
-          <SelectedLabel label={label} key={label.id} />
+        {props.todo.labels.map((label, index) => (
+          <SelectedLabel label={label} key={index} />
         ))}
       </div>
 
@@ -66,11 +66,12 @@ export const TodoItem = ({ ...props }) => {
                 Attach Label
               </CustomButton>
             </DropdownItem>
+            
           </DropdownMenu>
         </Dropdown>
       </div>
       <MyModal visible={modal} setVisible={setModal}>
-        <LabelButtons handleLabelClick={handleLabelClick} />
+        <LabelButtons handleLabelClick={handleLabelClick}  />
       </MyModal>
     </div>
   );

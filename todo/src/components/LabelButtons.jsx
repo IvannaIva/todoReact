@@ -1,7 +1,15 @@
 import React from "react";
 import LabButton from "./UI/button/LabButton";
 
-const LabelButtons = ({ handleLabelClick}) => {
+const LabelButtons = ({ handleLabelClick }) => {
+  const handleCustomLabelClick = () => {
+    const customLabel = prompt("Enter custom label");
+
+    if (customLabel) {
+      handleLabelClick(customLabel);
+    }
+  };
+
   return (
     <div className="labelButton-content">
       <LabButton
@@ -26,6 +34,14 @@ const LabelButtons = ({ handleLabelClick}) => {
         onClick={() => handleLabelClick("Work")}
       >
         Work{" "}
+      </LabButton>
+      <LabButton
+        size="150px"
+        borderRadius="10px"
+        onClick={handleCustomLabelClick}
+      >
+        {" "}
+        Custom label{" "}
       </LabButton>
     </div>
   );

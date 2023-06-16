@@ -43,7 +43,7 @@ function App() {
           const labelIndex = el.labels.indexOf(label);
 
           if (labelIndex !== -1) {
-            const updatedLabels = el.labels;
+            const updatedLabels = [...el.labels];
 
             updatedLabels.splice(labelIndex, 1);
             return { ...el, labels: updatedLabels };
@@ -56,18 +56,6 @@ function App() {
       return newArr;
     });
   };
-
-  // const addLabelToTodo = (label, todo) => {
-
-  //   setTodos((prevState) => {
-
-  //     const newArr = prevState.map((el) =>
-  //       el.id === todo.id ? { ...el, labels: [...el.labels, label]} : el
-  //     );
-
-  //     return newArr;
-  //   });
-  // };
 
   return (
     <div className="App">
