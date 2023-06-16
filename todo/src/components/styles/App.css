@@ -59,8 +59,6 @@
 }
 
 .slabel {
-    width: 70px;
-    height: 10px;
     display: inline-flex;
     border: 2px solid teal;
     justify-content: space-between;
