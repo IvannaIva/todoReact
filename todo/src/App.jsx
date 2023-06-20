@@ -57,11 +57,27 @@ function App() {
     });
   };
 
+  const removeLabelFromTodo = (labelToRemove, todo) => {
+    setTodos((prevState) => {
+      const updatedTodos = prevState.map((el) => {
+        if (el.id === todo.id) {
+          const updatedLabels = el.labels.filter(
+            (label) => label !== labelToRemove
+          );
+          return { ...el, labels: updatedLabels };
+        }
+        return el;
+      });
+      return updatedTodos;
+    });
+  };
+
   return (
     <div className="App">
       <TodoForm create={createTodo} />
 
       <TodoList
+        removeLabelFromTodo={removeLabelFromTodo}
         addLabel={addLabelToTodo}
         edit={editTodo}
         remove={removeTodo}

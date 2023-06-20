@@ -1,7 +1,14 @@
 import React from "react";
 import { TodoItem } from "./TodoItem";
 
-export const TodoList = ({ todos, title, remove, edit, addLabel }) => {
+export const TodoList = ({
+  todos,
+  title,
+  remove,
+  edit,
+  addLabel,
+  removeLabelFromTodo,
+}) => {
   if (!todos.length) {
     return <h1 style={{ textAlign: "center" }}>Список порожній !</h1>;
   }
@@ -11,6 +18,7 @@ export const TodoList = ({ todos, title, remove, edit, addLabel }) => {
       <h1 style={{ textAlign: "center" }}> {title} </h1>
       {todos.map((todo, index) => (
         <TodoItem
+        removeLabelFromTodo={removeLabelFromTodo}
           addLabel={addLabel}
           edit={edit}
           remove={remove}

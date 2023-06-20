@@ -58,11 +58,28 @@
     padding-top: 10px;
 }
 
-.slabel {
+
+/* .slabel {
     display: inline-flex;
     border: 2px solid teal;
     justify-content: space-between;
     align-items: center;
     padding: 5px 15px;
     margin-right: 20px;
+} */
+
+.slabel {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+}
+
+.badgeLabel {
+    width: 100px;
+}
+
+.closeLabel {
+    position: fixed;
+    height: 2px;
 }

@@ -20,10 +20,6 @@ export default function TodoForm({ create }) {
     setTodo({ title: "" });
   };
 
-  // useEffect(() => {
-  //   localStorage.setItem("lab", JSON.stringify(todo));
-  // }, [todo]);
-
   return (
     <form>
       <MyInput
