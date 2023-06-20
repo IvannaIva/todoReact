@@ -2,10 +2,10 @@ import React from "react";
 import { Badge } from "reactstrap";
 import { CloseButton } from "reactstrap";
 
-export const SelectedLabel = ({ ...props }) => {
+export const SelectedLabel = (props) => {
   const handleDelete = () => {
     console.log("handleDelete", props.label);
-    //  props.removeLabelFromTodo(label, props.todo);
+      props.removeLabelFromTodo(props.label, props.todo);
   };
 
   return (

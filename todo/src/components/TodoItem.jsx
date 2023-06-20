@@ -13,7 +13,7 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-export const TodoItem = ({ ...props }, { removeLabelFromTodo }) => {
+export const TodoItem = ({ ...props }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
@@ -39,9 +39,10 @@ export const TodoItem = ({ ...props }, { removeLabelFromTodo }) => {
       <div className="selected-label">
         {props.todo.labels.map((label, index) => (
           <SelectedLabel
-            removeLabelFromTodo={removeLabelFromTodo}
+            removeLabelFromTodo={props.removeLabelFromTodo}
             label={label}
             key={index}
+            todo={props.todo}
           />
         ))}
       </div>
