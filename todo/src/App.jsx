@@ -21,17 +21,17 @@ function App() {
     });
   };
 
-  const editTodo = (edittodo) => {
-    const editTitle = prompt("tytytry");
-
-    console.log(edittodo);
-
+  const editTodo = (todo, newTitle) => {
+    console.log('todo', todo)
+    console.log('newTitle', newTitle)
     setTodos((prevState) => {
       const newArr = [...prevState].map((el) =>
-        el.id === edittodo.id ? { ...el, title: editTitle } : el
+        el.id === todo.id ? { ...el, title: newTitle } : el
       );
       return newArr;
+      
     });
+    
   };
 
   const addLabelToTodo = (label, todo) => {
@@ -79,7 +79,7 @@ function App() {
       <TodoList
         removeLabelFromTodo={removeLabelFromTodo}
         addLabel={addLabelToTodo}
-        edit={editTodo}
+        editTodo={editTodo}
         remove={removeTodo}
         todos={todos}
         title="Список справ !"

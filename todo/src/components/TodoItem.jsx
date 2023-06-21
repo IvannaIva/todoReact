@@ -5,6 +5,7 @@ import MyModal from "./MyModal/MyModal";
 import CustomButton from "./UI/button/CustomButton";
 import LabelButtons from "./LabelButtons";
 import SelectedLabel from "./SelectedLabel";
+import EditTodoForm from "./EditTodoForm";
 
 import {
   Dropdown,
@@ -15,9 +16,17 @@ import {
 
 export const TodoItem = ({ ...props }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const toggleEdit = () => setEditOpen((prevState) => !prevState);
 
   const [modal, setModal] = useState(false);
+  // const [label, setLabel] = useState([])
+
+  const handleEdit = (newTitle) => {
+    props.editTodo(props.todo, newTitle);
+    setEditOpen(false);
+  };
 
   const handleLabelClick = (label) => {
     props.addLabel(label, props.todo);
@@ -31,9 +40,18 @@ export const TodoItem = ({ ...props }) => {
   return (
     <div className="todo">
       <div className="todo__content">
-        <div>
-          {props.number}. {props.todo.title}
-        </div>
+        {editOpen ? (
+          <div>
+            {" "}
+            {props.number}.
+            <EditTodoForm todo={props.todo} handleEdit={handleEdit} />
+          </div>
+        ) : (
+          <div>
+            {" "}
+            {props.number}. {props.todo.title}
+          </div>
+        )}
       </div>
 
       <div className="selected-label">
@@ -62,7 +80,7 @@ export const TodoItem = ({ ...props }) => {
               </CustomButton>
             </DropdownItem>
             <DropdownItem>
-              <CustomButton size="150px" onClick={() => props.edit(props.todo)}>
+              <CustomButton size="150px" onClick={toggleEdit}>
                 Edit
               </CustomButton>
             </DropdownItem>

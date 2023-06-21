@@ -5,7 +5,7 @@ export const TodoList = ({
   todos,
   title,
   remove,
-  edit,
+  editTodo,
   addLabel,
   removeLabelFromTodo,
 }) => {
@@ -18,9 +18,9 @@ export const TodoList = ({
       <h1 style={{ textAlign: "center" }}> {title} </h1>
       {todos.map((todo, index) => (
         <TodoItem
-        removeLabelFromTodo={removeLabelFromTodo}
+          removeLabelFromTodo={removeLabelFromTodo}
           addLabel={addLabel}
-          edit={edit}
+          editTodo={editTodo}
           remove={remove}
           number={index + 1}
           todo={todo}

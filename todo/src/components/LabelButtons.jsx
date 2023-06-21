@@ -1,7 +1,13 @@
 import React from "react";
 import LabButton from "./UI/button/LabButton";
 
-const LabelButtons = ({ handleLabelClick }) => {
+const LabelButtons = ({ handleLabelClick, added, setAdded }) => {
+
+  // if (added) {
+  //   rootClasses.push(cl.active);
+  // }
+
+
   const handleCustomLabelClick = () => {
     const customLabel = prompt("Enter custom label");
 
