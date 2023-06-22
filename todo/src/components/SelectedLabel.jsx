@@ -5,14 +5,13 @@ import { CloseButton } from "reactstrap";
 export const SelectedLabel = (props) => {
   const handleDelete = () => {
     console.log("handleDelete", props.label);
-      props.removeLabelFromTodo(props.label, props.todo);
+    props.removeLabelFromTodo(props.label, props.todo);
   };
 
   return (
     <div className="slabel">
       <Badge color="success" className="badgeLabel">
-        {props.label}
-
+        <span>{props.label}</span>
         <CloseButton className="closeLabel" onClick={handleDelete} />
       </Badge>
     </div>

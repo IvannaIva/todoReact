@@ -1,12 +1,24 @@
+
+
+
+
+
+
+
+
+
+
+
+
 import React from "react";
 import LabButton from "./UI/button/LabButton";
+import { useState } from "react";
 
-const LabelButtons = ({ handleLabelClick, added, setAdded }) => {
+import { VscCheck } from "react-icons/vsc";
 
-  // if (added) {
-  //   rootClasses.push(cl.active);
-  // }
-
+const LabelButtons = ({ handleLabelClick }) => {
+  const [addedLabel, setAddedLabel] = useState(false);
+  //const toggleaddedLabel = () => setAddedLabel((prevState) => !prevState);
 
   const handleCustomLabelClick = () => {
     const customLabel = prompt("Enter custom label");
@@ -16,29 +28,37 @@ const LabelButtons = ({ handleLabelClick, added, setAdded }) => {
     }
   };
 
+  const handleLabelButtonClick = (label) => {
+    setAddedLabel((prevState) => !prevState);
+    handleLabelClick(label);
+  };
+
   return (
     <div className="labelButton-content">
       <LabButton
         size="150px"
         borderRadius="10px"
-        onClick={() => handleLabelClick("Chores")}
+        onClick={() => handleLabelButtonClick("Chores")}
       >
-        {" "}
-        Chores{" "}
+        {addedLabel && <VscCheck />}
+        <span>Chores</span>
       </LabButton>
+
       <LabButton
         size="150px"
         borderRadius="10px"
-        onClick={() => handleLabelClick("Shopping")}
+        onClick={() => handleLabelButtonClick("Shopping")}
       >
+         {addedLabel && <VscCheck />}
         {" "}
         Shopping{" "}
       </LabButton>
       <LabButton
         size="150px"
         borderRadius="10px"
-        onClick={() => handleLabelClick("Work")}
+        onClick={() => handleLabelButtonClick("Work")}
       >
+         {addedLabel && <VscCheck />}
         Work{" "}
       </LabButton>
       <LabButton

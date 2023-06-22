@@ -39,20 +39,20 @@ export const TodoItem = ({ ...props }) => {
 
   return (
     <div className="todo">
-      <div className="todo__content">
+      {/* <div className="todo__content"> */}
         {editOpen ? (
-          <div>
+          <div className="todo__content">
             {" "}
-            {props.number}.
+            <span>{props.number}.</span>
             <EditTodoForm todo={props.todo} handleEdit={handleEdit} />
           </div>
         ) : (
-          <div>
+          <div className="todo__content">
             {" "}
-            {props.number}. {props.todo.title}
+            <span>{props.number}.</span>{props.todo.title}
           </div>
         )}
-      </div>
+      {/* </div> */}
 
       <div className="selected-label">
         {props.todo.labels.map((label, index) => (

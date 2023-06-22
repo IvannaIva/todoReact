@@ -14,7 +14,7 @@
 }
 
 .todo {
-    height: 50px;
+    /* height: 50px; */
     display: flex;
     padding: 15 px;
     border: 2px solid teal;
@@ -23,7 +23,24 @@
     align-items: center;
     padding: 5px 15px;
     position: relative;
+    /* border: 1px solid #ccc;
+    padding: 10px; */
 }
+
+.todo__content {
+    width: 450px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: auto;
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+
+
+/* .todo__content span {
+    height: 30px;
+} */
 
 .tree-dots-button {
     cursor: pointer;
@@ -68,6 +85,10 @@
     margin-right: 20px;
 } */
 
+.selected-label {
+    width: 300px;
+}
+
 .slabel {
     display: inline-flex;
     justify-content: space-between;
@@ -76,10 +97,17 @@
 }
 
 .badgeLabel {
-    width: 100px;
+    display: flex;
+    align-items: center;
 }
 
 .closeLabel {
-    position: fixed;
-    height: 2px;
+    margin-left: 5px;
+    cursor: pointer;
+    height: 5px;
+}
+
+.block-edit-input {
+    /* width: 200px;
+    height: 50px; */
 }

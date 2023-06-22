@@ -7,8 +7,9 @@ const EditTodoForm = ({ todo, handleEdit }) => {
   const [newTitle, setNewTitle] = useState(todo.title);
 
   return (
-    <Form onSubmit={(e) => handleEdit(newTitle)}>
-      <Row className="row-cols-lg-auto g-3 align-items-center">
+    // <div>
+    <Form className="block-edit-input" onSubmit={(e) => handleEdit(newTitle)}>
+      <Row >
         <Col>
           <Input
             type="text"
@@ -18,10 +19,11 @@ const EditTodoForm = ({ todo, handleEdit }) => {
         </Col>
 
         <Col>
-          <Button>Submit</Button>
+          <Button  type="submit">Submit</Button>
         </Col>
       </Row>
     </Form>
+    // </div>
 
     // <form onSubmit={(e) => handleEdit(newTitle)}>
     //   <input
