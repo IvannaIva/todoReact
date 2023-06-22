@@ -1,24 +1,9 @@
-
-
-
-
-
-
-
-
-
-
-
-
-import React from "react";
+import React, { useState } from "react";
 import LabButton from "./UI/button/LabButton";
-import { useState } from "react";
-
 import { VscCheck } from "react-icons/vsc";
 
 const LabelButtons = ({ handleLabelClick }) => {
-  const [addedLabel, setAddedLabel] = useState(false);
-  //const toggleaddedLabel = () => setAddedLabel((prevState) => !prevState);
+  const [addedLabels, setAddedLabels] = useState([]);
 
   const handleCustomLabelClick = () => {
     const customLabel = prompt("Enter custom label");
@@ -29,7 +14,11 @@ const LabelButtons = ({ handleLabelClick }) => {
   };
 
   const handleLabelButtonClick = (label) => {
-    setAddedLabel((prevState) => !prevState);
+    if (addedLabels.includes(label)) {
+      setAddedLabels(addedLabels.filter((addedLabel) => addedLabel !== label));
+    } else {
+      setAddedLabels([...addedLabels, label]);
+    }
     handleLabelClick(label);
   };
 
@@ -40,7 +29,7 @@ const LabelButtons = ({ handleLabelClick }) => {
         borderRadius="10px"
         onClick={() => handleLabelButtonClick("Chores")}
       >
-        {addedLabel && <VscCheck />}
+        {addedLabels.includes("Chores") && <VscCheck />}
         <span>Chores</span>
       </LabButton>
 
@@ -49,25 +38,25 @@ const LabelButtons = ({ handleLabelClick }) => {
         borderRadius="10px"
         onClick={() => handleLabelButtonClick("Shopping")}
       >
-         {addedLabel && <VscCheck />}
-        {" "}
-        Shopping{" "}
+        {addedLabels.includes("Shopping") && <VscCheck />}
+        Shopping
       </LabButton>
+
       <LabButton
         size="150px"
         borderRadius="10px"
         onClick={() => handleLabelButtonClick("Work")}
       >
-         {addedLabel && <VscCheck />}
-        Work{" "}
+        {addedLabels.includes("Work") && <VscCheck />}
+        Work
       </LabButton>
+
       <LabButton
         size="150px"
         borderRadius="10px"
         onClick={handleCustomLabelClick}
       >
-        {" "}
-        Custom label{" "}
+        Custom label
       </LabButton>
     </div>
   );

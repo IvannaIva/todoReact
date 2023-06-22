@@ -7,6 +7,8 @@ import { useEffect } from "react";
 export default function TodoForm({ create }) {
   const [todo, setTodo] = useState({ title: "" });
 
+  
+
   const addNewPost = (e) => {
     e.preventDefault();
 
