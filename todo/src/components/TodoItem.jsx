@@ -28,18 +28,15 @@ export const TodoItem = ({ ...props }) => {
   const toggleEdit = () => setEditOpen((prevState) => !prevState);
 
   const [modal, setModal] = useState(false);
-  const [open, setOpen] = useState(false);
 
-  const toggleOpenDes =() => {
-    setOpen((prevState) => !prevState);
-  }
-  // const toggleOpenDes = (id) => {
-  //   if (open === id) {
-  //     setOpen(); 
-  //   } else {
-  //     setOpen(id); 
-  //   }
-  // };
+  const [open, setOpen] = useState("");
+  const toggleDesc = (id) => {
+    if (open === id) {
+      setOpen();
+    } else {
+      setOpen(id);
+    }
+  };
 
   const handleEdit = (newTitle) => {
     props.editTodo(props.todo, newTitle);
@@ -58,13 +55,9 @@ export const TodoItem = ({ ...props }) => {
   return (
     // <div className="todo">
     <div>
-      <Accordion
-        // open={open}
-        // toggleOpenDes={toggleOpenDes}
-      
-      >
-        <AccordionItem >
-          <AccordionHeader onClick={toggleOpenDes}>
+      <Accordion open={open} toggle={toggleDesc}>
+        <AccordionItem>
+          <AccordionHeader targetId={props.number.toString()}>
             {editOpen ? (
               <div className="todo__content">
                 {" "}
@@ -118,7 +111,7 @@ export const TodoItem = ({ ...props }) => {
               </Dropdown>
             </div>
           </AccordionHeader>
-          <AccordionBody isOpen={open}>
+          <AccordionBody accordionId={props.number.toString()}>
             <span>{props.todo.description}</span>
           </AccordionBody>
         </AccordionItem>
