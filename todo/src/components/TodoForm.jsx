@@ -20,6 +20,7 @@ export default function TodoForm({ create }) {
       return;
     }
 
+
     const newTodo = {
       ...todo,
       id: Date.now(),

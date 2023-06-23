@@ -32,7 +32,7 @@ export const TodoItem = ({ ...props }) => {
   const [open, setOpen] = useState("");
   const toggleDesc = (id) => {
     if (open === id) {
-      setOpen();
+      setOpen("");
     } else {
       setOpen(id);
     }
@@ -111,9 +111,14 @@ export const TodoItem = ({ ...props }) => {
               </Dropdown>
             </div>
           </AccordionHeader>
-          <AccordionBody accordionId={props.number.toString()}>
-            <span>{props.todo.description}</span>
-          </AccordionBody>
+          {props.todo.description && (
+            <AccordionBody
+              accordionId={props.number.toString()}
+              // open={props.todo.description !== ""}
+            >
+              <span>{props.todo.description}</span>
+            </AccordionBody>
+          )}
         </AccordionItem>
       </Accordion>
 
