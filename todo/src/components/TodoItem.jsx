@@ -8,6 +8,13 @@ import SelectedLabel from "./SelectedLabel";
 import EditTodoForm from "./EditTodoForm";
 
 import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionItem,
+} from "reactstrap";
+
+import {
   Dropdown,
   DropdownToggle,
   DropdownMenu,
@@ -21,7 +28,18 @@ export const TodoItem = ({ ...props }) => {
   const toggleEdit = () => setEditOpen((prevState) => !prevState);
 
   const [modal, setModal] = useState(false);
-  // const [label, setLabel] = useState([])
+  const [open, setOpen] = useState(false);
+
+  const toggleOpenDes =() => {
+    setOpen((prevState) => !prevState);
+  }
+  // const toggleOpenDes = (id) => {
+  //   if (open === id) {
+  //     setOpen(); 
+  //   } else {
+  //     setOpen(id); 
+  //   }
+  // };
 
   const handleEdit = (newTitle) => {
     props.editTodo(props.todo, newTitle);
@@ -38,60 +56,74 @@ export const TodoItem = ({ ...props }) => {
   };
 
   return (
-    <div className="todo">
-      {/* <div className="todo__content"> */}
-        {editOpen ? (
-          <div className="todo__content">
-            {" "}
-            <span>{props.number}.</span>
-            <EditTodoForm todo={props.todo} handleEdit={handleEdit} />
-          </div>
-        ) : (
-          <div className="todo__content">
-            {" "}
-            <span>{props.number}.</span>{props.todo.title}
-          </div>
-        )}
-      {/* </div> */}
+    // <div className="todo">
+    <div>
+      <Accordion
+        // open={open}
+        // toggleOpenDes={toggleOpenDes}
+      
+      >
+        <AccordionItem >
+          <AccordionHeader onClick={toggleOpenDes}>
+            {editOpen ? (
+              <div className="todo__content">
+                {" "}
+                <span>{props.number}.</span>
+                <EditTodoForm todo={props.todo} handleEdit={handleEdit} />
+              </div>
+            ) : (
+              <div className="todo__content">
+                {" "}
+                <span>{props.number}.</span>
+                {props.todo.title}
+              </div>
+            )}
 
-      <div className="selected-label">
-        {props.todo.labels.map((label, index) => (
-          <SelectedLabel
-            removeLabelFromTodo={props.removeLabelFromTodo}
-            label={label}
-            key={index}
-            todo={props.todo}
-          />
-        ))}
-      </div>
+            <div className="selected-label">
+              {props.todo.labels.map((label, index) => (
+                <SelectedLabel
+                  removeLabelFromTodo={props.removeLabelFromTodo}
+                  label={label}
+                  key={index}
+                  todo={props.todo}
+                />
+              ))}
+            </div>
 
-      <div className="todo__btns">
-        <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
-          <DropdownToggle>
-            <TbDotsVertical className="tree-dots-button" />
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem>
-              <CustomButton
-                size="150px"
-                onClick={() => props.remove(props.todo)}
-              >
-                Del
-              </CustomButton>
-            </DropdownItem>
-            <DropdownItem>
-              <CustomButton size="150px" onClick={toggleEdit}>
-                Edit
-              </CustomButton>
-            </DropdownItem>
-            <DropdownItem>
-              <CustomButton size="150px" onClick={openModal}>
-                Attach Label
-              </CustomButton>
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </div>
+            <div className="todo__btns">
+              <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
+                <DropdownToggle>
+                  <TbDotsVertical className="tree-dots-button" />
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem>
+                    <CustomButton
+                      size="150px"
+                      onClick={() => props.remove(props.todo)}
+                    >
+                      Del
+                    </CustomButton>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <CustomButton size="150px" onClick={toggleEdit}>
+                      Edit
+                    </CustomButton>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <CustomButton size="150px" onClick={openModal}>
+                      Attach Label
+                    </CustomButton>
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          </AccordionHeader>
+          <AccordionBody isOpen={open}>
+            <span>{props.todo.description}</span>
+          </AccordionBody>
+        </AccordionItem>
+      </Accordion>
+
       <MyModal visible={modal} setVisible={setModal}>
         <LabelButtons handleLabelClick={handleLabelClick} />
       </MyModal>

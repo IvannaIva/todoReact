@@ -5,7 +5,7 @@ import MyButton from "./UI/button/MyButton";
 import { useEffect } from "react";
 
 export default function TodoForm({ create }) {
-  const [todo, setTodo] = useState({ title: "" });
+  const [todo, setTodo] = useState({ title: "", description:""});
 
   
 
@@ -19,7 +19,7 @@ export default function TodoForm({ create }) {
     };
 
     create(newTodo);
-    setTodo({ title: "" });
+    setTodo({ title: "", description: ""});
   };
 
   return (
@@ -29,6 +29,12 @@ export default function TodoForm({ create }) {
         onChange={(e) => setTodo({ ...todo, title: e.target.value })}
         type="text"
         placeholder="Назва списку"
+      />
+      <MyInput
+        value={todo.description}
+        onChange={(e) => setTodo({ ...todo, description: e.target.value })}
+        type="text"
+        placeholder="description"
       />
       <MyButton onClick={addNewPost}> Add Todo </MyButton>
     </form>

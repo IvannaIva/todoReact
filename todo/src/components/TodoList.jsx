@@ -8,6 +8,7 @@ export const TodoList = ({
   editTodo,
   addLabel,
   removeLabelFromTodo,
+
 }) => {
   if (!todos.length) {
     return <h1 style={{ textAlign: "center" }}>Список порожній !</h1>;
@@ -18,6 +19,7 @@ export const TodoList = ({
       <h1 style={{ textAlign: "center" }}> {title} </h1>
       {todos.map((todo, index) => (
         <TodoItem
+
           removeLabelFromTodo={removeLabelFromTodo}
           addLabel={addLabel}
           editTodo={editTodo}
