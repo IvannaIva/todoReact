@@ -1,16 +1,24 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import MyInput from "./UI/input/MyInput";
 import MyButton from "./UI/button/MyButton";
-import { useEffect } from "react";
 
 export default function TodoForm({ create }) {
-  const [todo, setTodo] = useState({ title: "", description:""});
+  const [todo, setTodo] = useState({ title: "", description: "" });
+  const [showAlert, setShowAlert] = useState(false);
 
-  
+  const alertAboutTitle = () => {
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
+  };
 
   const addNewPost = (e) => {
     e.preventDefault();
+    if (todo.title.trim() === "") {
+      alertAboutTitle();
+      return;
+    }
 
     const newTodo = {
       ...todo,
@@ -19,7 +27,7 @@ export default function TodoForm({ create }) {
     };
 
     create(newTodo);
-    setTodo({ title: "", description: ""});
+    setTodo({ title: "", description: "" });
   };
 
   return (
@@ -30,6 +38,11 @@ export default function TodoForm({ create }) {
         type="text"
         placeholder="Назва списку"
       />
+       {showAlert && (
+        <div className="alert">
+          <span>Заголовок не може бути порожнім</span>
+        </div>
+      )}
       <MyInput
         value={todo.description}
         onChange={(e) => setTodo({ ...todo, description: e.target.value })}
@@ -37,6 +50,7 @@ export default function TodoForm({ create }) {
         placeholder="description"
       />
       <MyButton onClick={addNewPost}> Add Todo </MyButton>
+     
     </form>
   );
 }
