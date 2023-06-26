@@ -1,86 +1,82 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-shadow: border-box;
-}
-
-#root {
-    display: flex;
-    justify-content: center;
-}
-
-.App {
-    width: 800px;
-}
-
-.todo {
-    /* height: 50px; */
-    display: flex;
-    padding: 15 px;
-    border: 2px solid teal;
-    margin-top: 15px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 15px;
-    position: relative;
-    /* border: 1px solid #ccc;
+    * {
+        margin: 0;
+        padding: 0;
+        box-shadow: border-box;
+    }
+    
+    #root {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .App {
+        width: 800px;
+    }
+    
+    .todo {
+        /* height: 50px; */
+        display: flex;
+        padding: 15 px;
+        border: 2px solid teal;
+        margin-top: 15px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 15px;
+        position: relative;
+        /* border: 1px solid #ccc;
     padding: 10px; */
-}
-
-.todo__content {
-    width: 450px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    overflow: auto;
-    white-space: normal;
-    text-overflow: ellipsis;
-}
-
-
-/* .todo__content span {
+    }
+    
+    .todo__content {
+        width: 450px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow: auto;
+        white-space: normal;
+        text-overflow: ellipsis;
+    }
+    /* .todo__content span {
     height: 30px;
 } */
-
-.todo__btns {
-    z-index: 10000;
-}
-
-.tree-dots-button {
-    cursor: pointer;
-    transition: color transform 500 ms ease;
-}
-
-.tree-dots-button:hover {
-    color: #8fd1a2;
-    transform: scale(1.5);
-}
-
-.tree-dots {
-    position: absolute;
-    top: 30px;
-    width: 150px;
-    min-height: 100px;
-    background: #e4e1e1;
-    -webkit-box-shadow: 5px 2px 15px -7px #000000;
-    box-shadow: 5px 2px 15px -7px #000000;
-    z-index: 1000;
-    padding: 10px;
-}
-
-.labelButton-content {
-    border-radius: 16px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-}
-
-.labButtonStyle {
-    padding-top: 10px;
-}
-
-
-/* .slabel {
+    
+    .todo__btns {
+        padding-right: 10px;
+    }
+    
+    .tree-dots-button {
+        cursor: pointer;
+        transition: color transform 500 ms ease;
+    }
+    
+    .tree-dots-button:hover {
+        color: #8fd1a2;
+        transform: scale(1.5);
+    }
+    
+    .tree-dots {
+        position: absolute;
+        top: 30px;
+        width: 150px;
+        min-height: 100px;
+        background: #e4e1e1;
+        -webkit-box-shadow: 5px 2px 15px -7px #000000;
+        box-shadow: 5px 2px 15px -7px #000000;
+        z-index: 1000;
+        padding: 10px;
+    }
+    
+    .labelButton-content {
+        border-radius: 16px;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .labButtonStyle {
+        padding-top: 10px;
+    }
+    /* .slabel {
     display: inline-flex;
     border: 2px solid teal;
     justify-content: space-between;
@@ -88,25 +84,25 @@
     padding: 5px 15px;
     margin-right: 20px;
 } */
-
-.selected-label {
-    width: 300px;
-}
-
-.slabel {
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 15px;
-}
-
-.badgeLabel {
-    display: flex;
-    align-items: center;
-}
-
-.closeLabel {
-    margin-left: 5px;
-    cursor: pointer;
-    height: 5px;
-}
+    
+    .selected-label {
+        width: 300px;
+    }
+    
+    .slabel {
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 15px;
+    }
+    
+    .badgeLabel {
+        display: flex;
+        align-items: center;
+    }
+    
+    .closeLabel {
+        margin-left: 5px;
+        cursor: pointer;
+        height: 5px;
+    }
