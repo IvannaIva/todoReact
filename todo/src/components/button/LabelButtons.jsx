@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LabButton from "./UI/button/LabButton";
+import LabButton from "./LabButton";
 import { VscCheck } from "react-icons/vsc";
 
 const LabelButtons = ({ handleLabelClick }) => {

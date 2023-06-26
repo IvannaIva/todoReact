@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import MyInput from "./UI/input/MyInput";
-import MyButton from "./UI/button/MyButton";
+import MyInput from "../input/MyInput";
+import MyButton from "../button/MyButton";
 
 export default function TodoForm({ create }) {
   const [todo, setTodo] = useState({ title: "", description: "" });

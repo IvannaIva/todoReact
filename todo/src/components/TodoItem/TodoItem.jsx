@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { TbDotsVertical } from "react-icons/tb";
-import MyModal from "./MyModal/MyModal";
-import CustomButton from "./UI/button/CustomButton";
-import LabelButtons from "./LabelButtons";
-import SelectedLabel from "./SelectedLabel";
-import EditTodoForm from "./EditTodoForm";
+import MyModal from "../MyModal/MyModal";
+import CustomButton from "../button/CustomButton";
+import LabelButtons from "../button/LabelButtons";
+import SelectedLabel from "../SelectedLabel/SelectedLabel";
+import EditTodoForm from "../EditTodoForm/EditTodoForm";
 import { VscArrowDown } from "react-icons/vsc";
 
 import { Collapse, Button, CardBody, Card } from "reactstrap";
