@@ -25,7 +25,9 @@ export const TodoItem = ({ ...props }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const toggleEdit = () => setEditOpen((prevState) => !prevState);
+  const toggleEdit = () => {
+    setEditOpen((prevState) => !prevState);
+  };
 
   const [modal, setModal] = useState(false);
 
@@ -52,8 +54,12 @@ export const TodoItem = ({ ...props }) => {
     setModal(true);
   };
 
+  const handleThreeDotsClick = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    // <div className="todo">
+    //  <div className="todo">
     <div>
       <Accordion open={open} toggle={toggleDesc}>
         <AccordionItem>
@@ -83,7 +89,47 @@ export const TodoItem = ({ ...props }) => {
               ))}
             </div>
 
-            <div className="todo__btns">
+            {/* <div className="todo__btns"> */}
+            <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
+              <DropdownToggle onClick={(e) => handleThreeDotsClick(e)}>
+                <TbDotsVertical className="tree-dots-button" />
+              </DropdownToggle>
+
+              <DropdownMenu>
+                <DropdownItem>
+                  <CustomButton
+                    size="150px"
+                    onClick={() => props.remove(props.todo)}
+                  >
+                    Del
+                  </CustomButton>
+                </DropdownItem>
+                <DropdownItem onClick={(e) => handleThreeDotsClick(e)}>
+                  <CustomButton size="150px" onClick={toggleEdit}>
+                    Edit
+                  </CustomButton>
+                </DropdownItem>
+                <DropdownItem onClick={(e) => handleThreeDotsClick(e)}>
+                  <CustomButton size="150px" onClick={openModal}>
+                    Attach Label
+                  </CustomButton>
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+            {/* </div> */}
+          </AccordionHeader>
+          {props.todo.description && (
+            <AccordionBody
+              accordionId={props.number.toString()}
+              // open={props.todo.description !== ""}
+            >
+              <span>{props.todo.description}</span>
+            </AccordionBody>
+          )}
+        </AccordionItem>
+      </Accordion>
+
+      {/* <div className="todo__btns">
               <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
                 <DropdownToggle>
                   <TbDotsVertical className="tree-dots-button" />
@@ -109,18 +155,7 @@ export const TodoItem = ({ ...props }) => {
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-            </div>
-          </AccordionHeader>
-          {props.todo.description && (
-            <AccordionBody
-              accordionId={props.number.toString()}
-              // open={props.todo.description !== ""}
-            >
-              <span>{props.todo.description}</span>
-            </AccordionBody>
-          )}
-        </AccordionItem>
-      </Accordion>
+            </div> */}
 
       <MyModal visible={modal} setVisible={setModal}>
         <LabelButtons handleLabelClick={handleLabelClick} />
