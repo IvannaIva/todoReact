@@ -1,9 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import classes from "./EmailPasForm.module.css";
-
+import { NavLink } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 export default function EmailPasForm() {
+  const navigate = useNavigate();
   return (
     <div className={classes.email_pas_form}>
       <Form>
@@ -29,7 +32,7 @@ export default function EmailPasForm() {
             type="password"
           />
         </FormGroup>{" "}
-        <Button>Submit</Button>
+        <Button onClick={() => navigate("/")}>Submit</Button>
       </Form>
     </div>
   );
