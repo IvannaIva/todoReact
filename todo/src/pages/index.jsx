@@ -10,13 +10,15 @@ import { Layout } from "../components/Layout";
 function RoutesPages() {
   return (
     <div>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="login">login</NavLink>
+         <NavLink to="/">login</NavLink>
+      <NavLink to="home">Home</NavLink>
+     
 
       <Routes>
         {/* <Route path="/" element={<Layout />}> */}
-        <Route index element={<Home />} />{" "}
-        <Route path="login" element={<Login />} /> {/* </Route>{" "} */}
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />{" "}
+         {/* </Route>{" "} */}
       </Routes>
     </div>
   );

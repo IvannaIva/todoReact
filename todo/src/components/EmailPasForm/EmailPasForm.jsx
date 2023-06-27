@@ -32,7 +32,7 @@ export default function EmailPasForm() {
             type="password"
           />
         </FormGroup>{" "}
-        <Button onClick={() => navigate("/")}>Submit</Button>
+        <Button onClick={() => navigate("/home")}>Submit</Button>
       </Form>
     </div>
   );
