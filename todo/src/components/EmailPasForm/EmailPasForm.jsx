@@ -5,11 +5,19 @@ import classes from "./EmailPasForm.module.css";
 import { NavLink } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
-export default function EmailPasForm() {
+export default function EmailPasForm(handleLogin) {
   const navigate = useNavigate();
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(e); // Call the handleLogin function passed from the App component
+
+    // Redirect to the Home page if authentication is successful
+    navigate("/home");
+  };
   return (
     <div className={classes.email_pas_form}>
-      <Form>
+      <Form onSubmit={handleFormSubmit}>
         <FormGroup>
           <Label for="exampleEmail" hidden>
             Email
@@ -33,6 +41,7 @@ export default function EmailPasForm() {
           />
         </FormGroup>{" "}
         <Button onClick={() => navigate("/home")}>Submit</Button>
+        {/* <Button >Submit</Button> */}
       </Form>
     </div>
   );

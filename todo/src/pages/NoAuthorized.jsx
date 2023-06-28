@@ -4,15 +4,16 @@ import LoginPage from "./LoginPage";
 import { Route, Routes } from "react-router-dom";
 import "../components/styles/App.css";
 import { NavLink } from "react-router-dom";
-
+import {useNavigate} from "react-router-dom"
 import { Layout } from "../components/Layout";
 
-function NoAuthorized() {
+function NoAuthorized(handleLogin) {
+  
   return (
 
 
       <Routes>
-        <Route  path="/" element={<LoginPage />} />
+        <Route  path="/" element={<LoginPage handleLogin={handleLogin}/>} />
       </Routes>
  
   );

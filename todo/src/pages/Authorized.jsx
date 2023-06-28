@@ -1,15 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Home";
-
+import { useNavigate } from "react-router-dom";
 import "../components/styles/App.css";
 
 const Authorized = () => {
-
+ 
   return (
     <Routes>
-   <Route path="/home" element={<Home />} />
-
+      <Route path="/home" element={<Home />} />
     </Routes>
   );
 };
