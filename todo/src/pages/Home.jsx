@@ -1,11 +1,10 @@
 import "../components/styles/App.css";
 import React, { Component } from "react";
 
-
 import { TodoList } from "../components/TodoList/TodoList";
 import TodoForm from "../components/TodoForm/TodoForm";
 
-import useLocalStorage from "../hooks/useLocalStorage"
+import useLocalStorage from "../hooks/useLocalStorage";
 
 function Home() {
   const [todos, setTodos] = useLocalStorage("dataTod", []);
@@ -23,16 +22,14 @@ function Home() {
   };
 
   const editTodo = (todo, newTitle) => {
-    console.log('todo', todo)
-    console.log('newTitle', newTitle)
+    console.log("todo", todo);
+    console.log("newTitle", newTitle);
     setTodos((prevState) => {
       const newArr = [...prevState].map((el) =>
         el.id === todo.id ? { ...el, title: newTitle } : el
       );
       return newArr;
-      
     });
-    
   };
 
   const addLabelToTodo = (label, todo) => {
@@ -73,13 +70,11 @@ function Home() {
     });
   };
 
-
   return (
     <div className="Home">
       <TodoForm create={createTodo} />
 
       <TodoList
- 
         removeLabelFromTodo={removeLabelFromTodo}
         addLabel={addLabelToTodo}
         editTodo={editTodo}

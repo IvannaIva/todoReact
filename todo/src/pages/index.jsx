@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Home from "./Home";
-import Login from "./Login";
+import LoginPage from "./LoginPage";
 import { Route, Routes } from "react-router-dom";
 import "../components/styles/App.css";
 import { NavLink } from "react-router-dom";
@@ -10,15 +10,11 @@ import { Layout } from "../components/Layout";
 function RoutesPages() {
   return (
     <div>
-         <NavLink to="/">login</NavLink>
-      <NavLink to="home">Home</NavLink>
-     
+      {/* <NavLink to="/">Home</NavLink>
+      <NavLink to="login">login</NavLink> */}
 
       <Routes>
-        {/* <Route path="/" element={<Layout />}> */}
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />{" "}
-         {/* </Route>{" "} */}
+        <Route index path="/" element={<LoginPage />} />
       </Routes>
     </div>
   );
