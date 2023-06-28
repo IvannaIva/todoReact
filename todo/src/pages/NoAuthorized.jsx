@@ -7,17 +7,15 @@ import { NavLink } from "react-router-dom";
 
 import { Layout } from "../components/Layout";
 
-function RoutesPages() {
+function NoAuthorized() {
   return (
-    <div>
-      {/* <NavLink to="/">Home</NavLink>
-      <NavLink to="login">login</NavLink> */}
+
 
       <Routes>
-        <Route index path="/" element={<LoginPage />} />
+        <Route  path="/" element={<LoginPage />} />
       </Routes>
-    </div>
+ 
   );
 }
 
-export { RoutesPages };
+export  {NoAuthorized} ;

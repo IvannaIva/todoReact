@@ -1,7 +1,7 @@
 import "./components/styles/App.css";
 import React, { Component } from "react";
 
-import { RoutesPages } from "./pages/index";
+import { NoAuthorized } from "./pages/NoAuthorized";
 import { BrowserRouter } from "react-router-dom";
 import Authorized from "./pages/Authorized";
 
@@ -10,9 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {/* {isAuthenticated ? <Authorized /> : <RoutesPages />} */}
-        {/* <RoutesPages /> */}
-        <Authorized />
+        {isAuthenticated ? <Authorized /> : <NoAuthorized />}
       </div>
     </BrowserRouter>
   );
