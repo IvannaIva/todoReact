@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import "../components/styles/App.css";
 
 const Authorized = () => {
- 
   return (
     <Routes>
       <Route path="/home" element={<Home />} />

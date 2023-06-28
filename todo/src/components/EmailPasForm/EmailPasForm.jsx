@@ -1,18 +1,17 @@
 import React from "react";
-import { useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import classes from "./EmailPasForm.module.css";
-import { NavLink } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import { AuthenticatedContext } from "../../App";
 
-export default function EmailPasForm(handleLogin) {
+export default function EmailPasForm() {
   const navigate = useNavigate();
+
+  const { handleLogin } = React.useContext(AuthenticatedContext);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleLogin(e); // Call the handleLogin function passed from the App component
-
-    // Redirect to the Home page if authentication is successful
+    handleLogin(e);
     navigate("/home");
   };
   return (
@@ -40,8 +39,7 @@ export default function EmailPasForm(handleLogin) {
             type="password"
           />
         </FormGroup>{" "}
-        <Button onClick={() => navigate("/home")}>Submit</Button>
-        {/* <Button >Submit</Button> */}
+        <Button>Submit</Button>
       </Form>
     </div>
   );

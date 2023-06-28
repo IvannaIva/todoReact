@@ -4,7 +4,8 @@ import { useState } from "react";
 import { NoAuthorized } from "./pages/NoAuthorized";
 import { BrowserRouter } from "react-router-dom";
 import Authorized from "./pages/Authorized";
-import { useNavigate } from "react-router-dom";
+
+export const AuthenticatedContext = React.createContext();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -29,11 +30,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {isAuthenticated ? (
-          <Authorized />
-        ) : (
-          <NoAuthorized handleLogin={handleLogin} />
-        )}
+        <AuthenticatedContext.Provider value={{ handleLogin }}>
+          {isAuthenticated ? <Authorized /> : <NoAuthorized />}
+        </AuthenticatedContext.Provider>
       </div>
     </BrowserRouter>
   );
