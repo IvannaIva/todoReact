@@ -2,16 +2,25 @@ import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import styles from "./EmailPasForm.module.css";
 import { useNavigate } from "react-router-dom";
-import { AuthenticatedContext } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
+import  { loginSuccess }  from '../../store/loginSlice';
 
 export default function EmailPasForm() {
   const navigate = useNavigate();
-
-  const { handleLogin } = React.useContext(AuthenticatedContext);
-
+  const dispatch = useDispatch();
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleLogin(e);
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+
+    // Перевірити ідентифікаційні дані
+    if (email === "admin@example.com" && password === "password") {
+      // Якщо ідентифікація пройшла успішно, викликати дію loginSuccess
+      dispatch(loginSuccess());
+    } else {
+      // Якщо ідентифікація неуспішна, виконати певні дії, наприклад, відобразити повідомлення про помилку
+      console.log("Невірні ідентифікаційні дані");
+    }
     navigate("/home");
   };
   return (
@@ -40,7 +49,9 @@ export default function EmailPasForm() {
             type="password"
           />
         </FormGroup>{" "}
-        {/* <Button onClick={() => navigate("/home")}>Submit</Button> */}
+        <div className={styles.forgotPas}>
+          <span>Forgot Password</span>
+        </div>
         <Button className={styles.customButton}>Login</Button>
       </Form>
       <p>

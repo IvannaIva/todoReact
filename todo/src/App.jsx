@@ -4,36 +4,20 @@ import { useState } from "react";
 import { NoAuthorized } from "./pages/NoAuthorized";
 import { BrowserRouter } from "react-router-dom";
 import Authorized from "./pages/Authorized";
-import { useNavigate } from "react-router-dom";
-import { click } from "@testing-library/user-event/dist/click";
-export const AuthenticatedContext = React.createContext();
+import { loginSuccess, logout } from "./store/loginSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  //const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-    // Отримати значення введеної електронної пошти та пароля
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-
-    // Перевірити ідентифікаційні дані
-    if (email === "admin@example.com" && password === "password") {
-      // Якщо ідентифікація пройшла успішно, оновити стан isAuthenticated
-      setIsAuthenticated(true);
-    } else {
-      // Якщо ідентифікація неуспішна, виконати певні дії, наприклад, відобразити повідомлення про помилку
-      console.log("Невірні ідентифікаційні дані");
-    }
-  };
 
   return (
     <BrowserRouter>
       <div className="App">
-        <AuthenticatedContext.Provider value={{ handleLogin }}>
-          {isAuthenticated ? <Authorized /> : <NoAuthorized />}
-        </AuthenticatedContext.Provider>
+        {isAuthenticated ? <Authorized /> : <NoAuthorized />}
       </div>
     </BrowserRouter>
   );
