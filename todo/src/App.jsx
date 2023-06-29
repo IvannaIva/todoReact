@@ -4,7 +4,8 @@ import { useState } from "react";
 import { NoAuthorized } from "./pages/NoAuthorized";
 import { BrowserRouter } from "react-router-dom";
 import Authorized from "./pages/Authorized";
-
+import { useNavigate } from "react-router-dom";
+import { click } from "@testing-library/user-event/dist/click";
 export const AuthenticatedContext = React.createContext();
 
 function App() {

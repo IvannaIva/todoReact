@@ -6,6 +6,7 @@ import "../components/styles/App.css";
 import { NavLink } from "react-router-dom";
 import {useNavigate} from "react-router-dom"
 import { Layout } from "../components/Layout";
+import SignupForm from "../components/EmailPasForm/SignupForm";
 
 function NoAuthorized() {
   
@@ -14,6 +15,7 @@ function NoAuthorized() {
 
       <Routes>
         <Route  path="/" element={<LoginPage/>} />
+        <Route  path="/signup" element={<SignupForm/>} />
       </Routes>
  
   );

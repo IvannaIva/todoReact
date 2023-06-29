@@ -1,3 +1,43 @@
-        .email_pas_form {
-            padding-top: 100px;
-        }
+.email_pas_form {
+    width: 440px;
+    height: 540px;
+    background: #f6f3f3;
+    border-radius: 8px;
+    box-shadow: 0 0 20px -10px #000;
+    margin: calc(50vh - 220px) auto;
+    padding: 20px 30px;
+    /* max-width: calc(100vw - 40px); */
+    /* box-sizing: border-box; */
+    position: relative;
+}
+
+h2 {
+    margin: 10px 0;
+    padding-bottom: 30px;
+    /* width: 180px; */
+    /* color: #78788c; */
+    /* border-bottom: 3px solid #78788c; */
+    text-align: center;
+}
+
+button {
+    width: 100%;
+}
+
+p {
+    margin: 30px 0;
+    text-align: center;
+}
+
+span {
+    color: rgb(4, 4, 110);
+    cursor: pointer;
+}
+
+.customButton {
+    background-color: rgb(4, 4, 110);
+}
+
+.customButton:hover {
+    background-color: rgb(4, 4, 134);
+}

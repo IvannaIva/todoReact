@@ -4,20 +4,21 @@ import styles from "./EmailPasForm.module.css";
 import { useNavigate } from "react-router-dom";
 import { AuthenticatedContext } from "../../App";
 
-export default function EmailPasForm() {
+export default function SignupForm() {
   const navigate = useNavigate();
 
-  const { handleLogin } = React.useContext(AuthenticatedContext);
+  //   const { handleLogin } = React.useContext(AuthenticatedContext);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    handleLogin(e);
-    navigate("/home");
-  };
+  //   const handleFormSubmit = (e) => {
+  //     e.preventDefault();
+  //     handleLogin(e);
+  //     navigate("/home");
+  //   };
   return (
     <div className={styles.email_pas_form}>
-      <h2>Login</h2>
-      <Form onSubmit={handleFormSubmit}>
+    {/* <div> */}
+      <h2>Signup</h2>
+      <Form>
         <FormGroup>
           <Label for="exampleEmail" hidden>
             Email
@@ -31,7 +32,7 @@ export default function EmailPasForm() {
         </FormGroup>{" "}
         <FormGroup>
           <Label for="examplePassword" hidden>
-            Password
+            Create password
           </Label>
           <Input
             id="examplePassword"
@@ -40,13 +41,23 @@ export default function EmailPasForm() {
             type="password"
           />
         </FormGroup>{" "}
-        {/* <Button onClick={() => navigate("/home")}>Submit</Button> */}
-        <Button className={styles.customButton}>Login</Button>
+        <FormGroup>
+          <Label for="examplePassword" hidden>
+            Confirm password
+          </Label>
+          <Input
+            id="examplePassword"
+            name="password"
+            placeholder="Password"
+            type="password"
+          />
+        </FormGroup>{" "}
+        <Button className={styles.customButton} >Signup</Button>
+        <p>
+          Already have an account?{" "}
+          <span onClick={() => navigate("/")}>Login</span>
+        </p>
       </Form>
-      <p>
-        Don't have an account?{" "}
-        <span onClick={() => navigate("/signup")}>Signup</span>
-      </p>
     </div>
   );
 }
