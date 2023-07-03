@@ -1,8 +1,9 @@
 import React from "react";
 import { TodoItem } from "../TodoItem/TodoItem";
+import { useSelector } from "react-redux";
 
 export const TodoList = ({
-  todos,
+  // todos,
   title,
   remove,
   editTodo,
@@ -10,6 +11,9 @@ export const TodoList = ({
   removeLabelFromTodo,
 
 }) => {
+const todos = useSelector(state => state.todos.todos)
+
+
   if (!todos.length) {
     return <h1 style={{ textAlign: "center" }}>Список порожній !</h1>;
   }
@@ -22,8 +26,8 @@ export const TodoList = ({
 
           removeLabelFromTodo={removeLabelFromTodo}
           addLabel={addLabel}
-          editTodo={editTodo}
-          remove={remove}
+         
+          
           number={index + 1}
           todo={todo}
           key={todo.id}

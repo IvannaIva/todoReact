@@ -1,14 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import { Form,Row,Col,Input,Button} from "reactstrap";
+import { useDispatch } from "react-redux";
+import { removeTodo, editTodo } from "../../store/todoSlice";
 
-
-const EditTodoForm = ({ todo, handleEdit }) => {
+const EditTodoForm = (todo ) => {
+  const dispatch = useDispatch();
   const [newTitle, setNewTitle] = useState(todo.title);
+
+    const handleEdit = (e) => {
+      e.preventDefault()
+      dispatch(editTodo({ todo, newTitle }));
+    //setEditOpen(false);
+  };
 
   return (
     // <div>
-    <Form className="block-edit-input" onSubmit={(e) => handleEdit(newTitle)}>
+    <Form className="block-edit-input" onSubmit={(e) => handleEdit()}>
       <Row >
         <Col>
           <Input

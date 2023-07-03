@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import MyInput from "../input/MyInput";
 import MyButton from "../button/MyButton";
 
-export default function TodoForm({ create }) {
+import { useDispatch } from "react-redux";
+import {addTodo} from '../../store/todoSlice'
+
+export default function TodoForm() {
   const [todo, setTodo] = useState({ title: "", description: "" });
+  
+  const dispatch = useDispatch();
+  const addTask = () => dispatch((addTodo({todo})))
+  
   const [showAlert, setShowAlert] = useState(false);
 
   const alertAboutTitle = () => {
@@ -16,18 +23,12 @@ export default function TodoForm({ create }) {
   const addNewPost = (e) => {
     e.preventDefault();
     if (todo.title.trim() === "") {
-      alertAboutTitle();
+    alertAboutTitle();
       return;
     }
 
 
-    const newTodo = {
-      ...todo,
-      id: Date.now(),
-      labels: [],
-    };
-
-    create(newTodo);
+   addTask()
     setTodo({ title: "", description: "" });
   };
 

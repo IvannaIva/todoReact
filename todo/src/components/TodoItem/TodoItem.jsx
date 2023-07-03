@@ -7,6 +7,8 @@ import LabelButtons from "../button/LabelButtons";
 import SelectedLabel from "../SelectedLabel/SelectedLabel";
 import EditTodoForm from "../EditTodoForm/EditTodoForm";
 import { VscArrowDown } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
+import { removeTodo, editTodo } from "../../store/todoSlice";
 
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 
@@ -17,7 +19,14 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-export const TodoItem = ({ ...props }) => {
+export const TodoItem = ({
+  todo,
+  number,
+
+  addLabel,
+  removeLabelFromTodo,
+}) => {
+  const dispatch = useDispatch();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -31,13 +40,15 @@ export const TodoItem = ({ ...props }) => {
 
   const toggleCollapse = () => setIsOpen(!isOpen);
 
-  const handleEdit = (newTitle) => {
-    props.editTodo(props.todo, newTitle);
-    setEditOpen(false);
-  };
+
+  // const handleEdit = (newTitle) => {
+
+  //   dispatch(editTodo(todo, newTitle));
+  //   setEditOpen(false);
+  // };
 
   const handleLabelClick = (label) => {
-    props.addLabel(label, props.todo);
+    addLabel(label, todo);
     setModal(false);
   };
 
@@ -51,30 +62,30 @@ export const TodoItem = ({ ...props }) => {
         {editOpen ? (
           <div className="todo__content">
             {" "}
-            <span>{props.number}.</span>
-            <EditTodoForm todo={props.todo} handleEdit={handleEdit} />
+            <span>{number}.</span>
+            <EditTodoForm todo={todo} />
           </div>
         ) : (
           <div className="todo__content">
             {" "}
-            <span>{props.number}.</span>
-            {props.todo.title}
+            <span>{number}.</span>
+            {todo.title}
           </div>
         )}
 
         <div className="selected-label">
-          {props.todo.labels.map((label, index) => (
+          {todo.labels.map((label, index) => (
             <SelectedLabel
-              removeLabelFromTodo={props.removeLabelFromTodo}
+              removeLabelFromTodo={removeLabelFromTodo}
               label={label}
               key={index}
-              todo={props.todo}
+              todo={todo}
             />
           ))}
         </div>
 
         <div className="todo__btns">
-          <Dropdown isOpen={dropdownOpen} toggle={toggle} {...props}>
+          <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle>
               <TbDotsVertical className="tree-dots-button" />
             </DropdownToggle>
@@ -83,7 +94,7 @@ export const TodoItem = ({ ...props }) => {
               <DropdownItem>
                 <CustomButton
                   size="150px"
-                  onClick={() => props.remove(props.todo)}
+                  onClick={() => dispatch(removeTodo({ todo }))}
                 >
                   Del
                 </CustomButton>
@@ -106,17 +117,17 @@ export const TodoItem = ({ ...props }) => {
           <VscArrowDown />
         </Button>
 
-        <MyModal visible={modal} setVisible={setModal}>
+        {/* <MyModal visible={modal} setVisible={setModal}>
           <LabelButtons handleLabelClick={handleLabelClick} />
-        </MyModal>
+        </MyModal> */}
       </div>
 
-      {props.todo.description && (
+      {todo.description && (
         <div>
-          <Collapse isOpen={isOpen} {...props} className="collapse-card">
+          <Collapse isOpen={isOpen} className="collapse-card">
             <Card>
               <CardBody>
-                <span>{props.todo.description}</span>
+                <span>{todo.description}</span>
               </CardBody>
             </Card>
           </Collapse>
