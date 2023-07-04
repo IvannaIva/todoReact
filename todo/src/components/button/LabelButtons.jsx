@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LabButton from "./LabButton";
 import { VscCheck } from "react-icons/vsc";
+import { useEffect } from "react";
 
 const LabelButtons = ({ handleLabelClick }) => {
   const [addedLabels, setAddedLabels] = useState([]);
@@ -39,7 +40,7 @@ const LabelButtons = ({ handleLabelClick }) => {
         onClick={() => handleLabelButtonClick("Shopping")}
       >
         {addedLabels.includes("Shopping") && <VscCheck />}
-        Shopping
+        <span>Shopping</span>
       </LabButton>
 
       <LabButton
@@ -56,7 +57,7 @@ const LabelButtons = ({ handleLabelClick }) => {
         borderRadius="10px"
         onClick={handleCustomLabelClick}
       >
-        Custom label
+        <span> Custom label</span>
       </LabButton>
     </div>
   );

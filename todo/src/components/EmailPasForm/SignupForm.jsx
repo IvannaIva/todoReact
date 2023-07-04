@@ -55,7 +55,7 @@ export default function SignupForm() {
         <Button className={styles.customButton} >Signup</Button>
         <p>
           Already have an account?{" "}
-          <span onClick={() => navigate("/")}>Login</span>
+          <span onClick={() => navigate("/login")}>Login</span>
         </p>
       </Form>
     </div>

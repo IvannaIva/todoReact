@@ -2,8 +2,8 @@ import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import styles from "./EmailPasForm.module.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import  { loginSuccess }  from '../../store/loginSlice';
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../store/loginSlice";
 
 export default function EmailPasForm() {
   const navigate = useNavigate();
@@ -17,11 +17,11 @@ export default function EmailPasForm() {
     if (email === "admin@example.com" && password === "password") {
       // Якщо ідентифікація пройшла успішно, викликати дію loginSuccess
       dispatch(loginSuccess());
+      navigate("/");
     } else {
       // Якщо ідентифікація неуспішна, виконати певні дії, наприклад, відобразити повідомлення про помилку
       console.log("Невірні ідентифікаційні дані");
     }
-    navigate("/home");
   };
   return (
     <div className={styles.email_pas_form}>

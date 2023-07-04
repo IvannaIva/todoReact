@@ -8,7 +8,7 @@ import SelectedLabel from "../SelectedLabel/SelectedLabel";
 import EditTodoForm from "../EditTodoForm/EditTodoForm";
 import { VscArrowDown } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
-import { removeTodo, editTodo } from "../../store/todoSlice";
+import { removeTodo, editTodo, addLabelToTodo } from "../../store/todoSlice";
 
 import { Collapse, Button, CardBody, Card } from "reactstrap";
 
@@ -40,15 +40,27 @@ export const TodoItem = ({
 
   const toggleCollapse = () => setIsOpen(!isOpen);
 
-
-  // const handleEdit = (newTitle) => {
-
-  //   dispatch(editTodo(todo, newTitle));
-  //   setEditOpen(false);
-  // };
+  const handleEditTodo = (updatedTodo) => {
+    dispatch(
+      editTodo({
+        todo: {
+          id: updatedTodo.id, // Додайте передачу id елемента todo
+          newTitle: updatedTodo.title,
+        },
+      })
+    );
+    setEditOpen(false);
+  };
 
   const handleLabelClick = (label) => {
-    addLabel(label, todo);
+    dispatch(
+      addLabelToTodo({
+        todo: {
+          id: todo.id,
+          label: label,
+        },
+      })
+    );
     setModal(false);
   };
 
@@ -63,7 +75,7 @@ export const TodoItem = ({
           <div className="todo__content">
             {" "}
             <span>{number}.</span>
-            <EditTodoForm todo={todo} />
+            <EditTodoForm todo={todo} onSave={handleEditTodo} />
           </div>
         ) : (
           <div className="todo__content">
@@ -76,7 +88,7 @@ export const TodoItem = ({
         <div className="selected-label">
           {todo.labels.map((label, index) => (
             <SelectedLabel
-              removeLabelFromTodo={removeLabelFromTodo}
+              //removeLabelFromTodo={removeLabelFromTodo}
               label={label}
               key={index}
               todo={todo}
@@ -117,9 +129,9 @@ export const TodoItem = ({
           <VscArrowDown />
         </Button>
 
-        {/* <MyModal visible={modal} setVisible={setModal}>
+        <MyModal visible={modal} setVisible={setModal}>
           <LabelButtons handleLabelClick={handleLabelClick} />
-        </MyModal> */}
+        </MyModal>
       </div>
 
       {todo.description && (

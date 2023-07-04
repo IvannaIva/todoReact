@@ -1,18 +1,31 @@
 import React from "react";
 import { Badge } from "reactstrap";
 import { CloseButton } from "reactstrap";
+import { useDispatch } from "react-redux";
+import { removeLabelFromTodo } from "../../store/todoSlice";
 
-export const SelectedLabel = (props) => {
-  const handleDelete = () => {
-    console.log("handleDelete", props.label);
-    props.removeLabelFromTodo(props.label, props.todo);
+export const SelectedLabel = ({ label, todo }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = (label) => {
+    dispatch(
+      removeLabelFromTodo({
+        todo: {
+          id: todo.id,
+          label: label,
+        },
+      })
+    );
   };
 
   return (
     <div className="slabel">
       <Badge color="success" className="badgeLabel">
-        <span>{props.label}</span>
-        <CloseButton className="closeLabel" onClick={handleDelete} />
+        <span>{label}</span>
+        <CloseButton
+          className="closeLabel"
+          onClick={() => handleDelete(label)}
+        />
       </Badge>
     </div>
   );
