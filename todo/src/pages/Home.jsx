@@ -18,7 +18,7 @@ function Home() {
 
     dispatch(logout());
 
-    navigate("/login");
+    navigate("/");
   };
 
   return (
