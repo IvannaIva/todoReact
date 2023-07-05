@@ -7,9 +7,29 @@ import { useState } from "react";
 import { loginSuccess } from "../../store/loginSlice";
 import { useForm } from "react-hook-form";
 
+import { Auth } from 'aws-amplify';
 
+const getSuccessfulResponse = (response) =>({
+  isSuccess: true,
+  data: response,
+  error: null
+})
 
+const getErrorResponse = (error) =>({
+  isSuccess: false,
+  data: null,
+  error: error
+})
 
+async function signIn(username, password) {
+  try {
+    const user = await Auth.signIn(username, password);
+    return getSuccessfulResponse(user) 
+  } catch (error) {
+    console.log('error signing in', error);
+    return getErrorResponse(error)
+  }
+}
 
 
 
@@ -19,15 +39,31 @@ export default function EmailPasForm() {
 
   const {
     register,
-    //formState: { errors },
+    formState: { errors },
     handleSubmit,
-  } = useForm();
+    setError
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+  const onSubmit = async(data) => {
+    console.log(data);
+    const response = await signIn(data.email, data.password)
+    if(response.isSuccess){
+      console.log(response.data)
+    }else {
+      console.log('error', response.error)
+    }
+    console.log(response);
   };
 
 
+  const {ref:emailRef, ...registerEmail} = register('email')
+  const {ref:passwordRef, ...registerPassword} = register('password')
+ 
 
   return (
     <div className={styles.email_pas_form}>
@@ -37,26 +73,27 @@ export default function EmailPasForm() {
           <Label for="exampleEmail" hidden>
             Email
           </Label>
-          <Input
-          {...register('email')}
+          <Input 
             id="exampleEmail"
             name="email"
             placeholder="Email"
-       
-          />
+            innerRef={emailRef}
+            {...registerEmail}/>
+
         </FormGroup>{" "}
         <FormGroup>
           <Label for="examplePassword" hidden>
             Password
           </Label>
           <Input
-           {...register('password')}
-            id="examplePassword"
-            name="password"
-            placeholder="Password"
-           
-          />
-      
+          id="password"
+          name="password"
+          placeholder="Password"
+
+          innerRef={passwordRef}
+          {...registerPassword} />
+
+
         </FormGroup>{" "}
         {/* <div className={styles.forgotPas}>
           <span onClick={handleForgotPassword}>Forgot Password</span>
