@@ -3,11 +3,16 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import styles from "./EmailPasForm.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { loginSuccess } from "../../store/loginSlice";
 
 export default function EmailPasForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [errors, setErrors] = useState({});
+  const [errorInput, setFormError] = useState(false);
+
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const email = e.target.elements.email.value;
@@ -19,14 +24,16 @@ export default function EmailPasForm() {
       dispatch(loginSuccess());
       navigate("/");
     } else {
-      // Якщо ідентифікація неуспішна, виконати певні дії, наприклад, відобразити повідомлення про помилку
-      console.log("Невірні ідентифікаційні дані");
+      setErrors({...errors, password: "Wrong Password"});
+      setFormError(true);
+      console.log("EMAIL NOT VALID. ", password);
+
     }
   };
   return (
     <div className={styles.email_pas_form}>
       <h2>Login</h2>
-      <Form onSubmit={handleFormSubmit}>
+      <Form onSubmit={handleFormSubmit} >
         <FormGroup>
           <Label for="exampleEmail" hidden>
             Email
@@ -47,7 +54,9 @@ export default function EmailPasForm() {
             name="password"
             placeholder="Password"
             type="password"
+            className={errorInput ? styles.errorInput : ""}
           />
+         <p className={styles.error_wrong}>{errors.password}</p>
         </FormGroup>{" "}
         <div className={styles.forgotPas}>
           <span>Forgot Password</span>

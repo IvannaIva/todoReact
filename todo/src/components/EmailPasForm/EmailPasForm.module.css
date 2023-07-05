@@ -43,3 +43,21 @@ span {
     padding-bottom: 30px;
     text-align: center;
 }
+
+.errorInput {
+    border: 1px solid red;
+}
+
+.error_wrong {
+    margin: 0;
+    text-align: left;
+    color: red;
+}
+
+
+/* You can also customize other styles for the error input field */
+
+
+/* .errorInput:focus {
+    outline-color: red;
+} */
