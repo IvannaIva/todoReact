@@ -9,14 +9,21 @@ import { loginSuccess } from "../../store/loginSlice";
 export default function EmailPasForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [errors, setErrors] = useState({});
   const [errorInput, setFormError] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
+
+    console.log("setEmail", email);
+    console.log("setPass", password);
+    // const email = e.target.elements.email.value;
+    // const password = e.target.elements.password.value;
 
     // Перевірити ідентифікаційні дані
     if (email === "admin@example.com" && password === "password") {
@@ -24,16 +31,20 @@ export default function EmailPasForm() {
       dispatch(loginSuccess());
       navigate("/");
     } else {
-      setErrors({...errors, password: "Wrong Password"});
+      setErrors({ ...errors, password: "Wrong Password" });
       setFormError(true);
       console.log("EMAIL NOT VALID. ", password);
-
     }
   };
+
+  const handleForgotPassword = () => {
+    setShowPassword(!showPassword); // Toggle the showPassword state
+  };
+
   return (
     <div className={styles.email_pas_form}>
       <h2>Login</h2>
-      <Form onSubmit={handleFormSubmit} >
+      <Form onSubmit={handleFormSubmit}>
         <FormGroup>
           <Label for="exampleEmail" hidden>
             Email
@@ -43,6 +54,8 @@ export default function EmailPasForm() {
             name="email"
             placeholder="Email"
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </FormGroup>{" "}
         <FormGroup>
@@ -53,13 +66,15 @@ export default function EmailPasForm() {
             id="examplePassword"
             name="password"
             placeholder="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className={errorInput ? styles.errorInput : ""}
           />
-         <p className={styles.error_wrong}>{errors.password}</p>
+          <p className={styles.error_wrong}>{errors.password}</p>
         </FormGroup>{" "}
         <div className={styles.forgotPas}>
-          <span>Forgot Password</span>
+          <span onClick={handleForgotPassword}>Forgot Password</span>
         </div>
         <Button className={styles.customButton}>Login</Button>
       </Form>
