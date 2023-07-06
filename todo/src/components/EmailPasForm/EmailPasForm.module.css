@@ -48,7 +48,7 @@ span {
     border: 1px solid red;
 }
 
-.error_wrong {
+.error_wrong p {
     margin: 0;
     text-align: left;
     color: red;
