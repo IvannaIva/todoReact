@@ -9,21 +9,26 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/loginSlice";
 import { signOut } from "../api/auth";
-import { Auth } from "aws-amplify";
 
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogoutButton = () => {
-    dispatch(logout());
-    signOut()
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log('error signing out: ', error);
-      });
+
+
+
+
+  const handleLogoutButton = async () => {
+    const response =  await signOut();
+    if (response.isSuccess) {
+      dispatch(logout());
+      navigate("/");
+      console.log("response.data", response.data);
+    } else {
+      
+      console.log("response_error", response.error);
+    }
+    console.log(response);
   };
 
   return (

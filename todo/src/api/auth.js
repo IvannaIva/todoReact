@@ -27,6 +27,7 @@ export async function signIn(username, password) {
 export async function signOut() {
     try {
         await Auth.signOut();
+        return getSuccessfulResponse(null);
     } catch (error) {
         console.log('error signing out: ', error);
     }
