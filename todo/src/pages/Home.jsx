@@ -8,23 +8,28 @@ import MyButton from "../components/button/MyButton";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/loginSlice";
+import { signOut } from "../api/auth";
+import { Auth } from "aws-amplify";
 
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLoginoutButton = (e) => {
-    // e.preventDefault();
-
+  const handleLogoutButton = () => {
     dispatch(logout());
-
-    navigate("/");
+    signOut()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log('error signing out: ', error);
+      });
   };
 
   return (
     <div className="Home">
       <div className="loginout-button">
-        <MyButton onClick={handleLoginoutButton}>loginout</MyButton>
+        <MyButton onClick={handleLogoutButton}>loginout</MyButton>
       </div>
       <TodoForm />
 

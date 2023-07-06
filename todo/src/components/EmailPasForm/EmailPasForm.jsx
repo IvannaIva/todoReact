@@ -60,9 +60,8 @@ export default function EmailPasForm() {
             Email
           </Label>
           <Input
-            id="exampleEmail"
-            name="email"
-            placeholder="Email"
+            type="tel" id="phone" name="phone"
+            placeholder="Tel"
             innerRef={emailRef}
             {...registerEmail}
           />
@@ -77,6 +76,7 @@ export default function EmailPasForm() {
           <Input
             id="password"
             name="password"
+            type="password"
             placeholder="Password"
             innerRef={passwordRef}
             {...registerPassword}
