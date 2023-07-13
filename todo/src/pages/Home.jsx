@@ -14,18 +14,13 @@ function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
-
-
-
   const handleLogoutButton = async () => {
-    const response =  await signOut();
+    const response = await signOut();
     if (response.isSuccess) {
       dispatch(logout());
       navigate("/");
       console.log("response.data", response.data);
     } else {
-      
       console.log("response_error", response.error);
     }
     console.log(response);

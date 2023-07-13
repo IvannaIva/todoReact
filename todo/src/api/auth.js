@@ -1,5 +1,7 @@
 import { Auth } from 'aws-amplify';
 
+
+
 export const getSuccessfulResponse = (response) => ({
     isSuccess: true,
     data: response,
@@ -11,6 +13,8 @@ export const getErrorResponse = (error) => ({
     data: null,
     error: error
 });
+
+
 
 export async function signIn(username, password) {
     try {
@@ -30,5 +34,6 @@ export async function signOut() {
         return getSuccessfulResponse(null);
     } catch (error) {
         console.log('error signing out: ', error);
+        return getErrorResponse(error);
     }
 }
