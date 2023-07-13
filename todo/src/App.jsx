@@ -27,13 +27,18 @@ function App() {
 
   async function checkSession() {
     try {
-      await Auth.currentAuthenticatedUser();
+      const session = await Auth.currentSession();
       console.log("Session is active");
 
-      dispatch(loginSuccess());
+      if (session.isValid()) {
+        console.log("Session is valid");
+        dispatch(loginSuccess());
+      } else {
+        console.log("Session is not valid");
+        dispatch(logout());
+      }
     } catch (error) {
       console.log("No active session");
-      dispatch(logout());
     }
   }
 
@@ -41,7 +46,6 @@ function App() {
     <BrowserRouter>
       <div className="App">
         {isAuthenticated ? <Authorized /> : <NoAuthorized />}
- 
       </div>
     </BrowserRouter>
   );
