@@ -27,35 +27,19 @@ export default function SignupForm() {
   );
 
   const onSubmitSignup = async (userDate) => {
-    console.log("userDate", userDate);
-    const signUpResponse = await signUp(userDate.email, userDate.password);
-    if (signUpResponse.isSuccess) {
-      console.log("Registration successful");
-
-      // Виклик функції підтвердження
-      const confirmResponse = await confirmSignUp(
-        userDate.email,
-        userDate.confirmationCode
-      );
-      if (confirmResponse.isSuccess) {
-        console.log("Confirmation successful");
-        dispatch(loginSuccess());
-        navigate("/");
-      } else {
-        setErrorMessage(
-          confirmResponse.error.message ||
-            "An error occurred during confirmation"
-        );
-        console.log("Confirmation error:", confirmResponse.error);
-      }
-    } else {
-      setErrorMessage(
-        signUpResponse.error.message || "An error occurred during registration"
-      );
-      console.log("Registration error:", signUpResponse.error);
-    }
-  };
-
+  console.log("userDate", userDate);
+  const signUpResponse = await signUp(userDate.email, userDate.password);
+  if (signUpResponse.isSuccess) {
+    //dispatch(loginSuccess());
+    navigate("/confirm");
+    console.log("signUpResponse.data", signUpResponse.userDate);
+  } else {
+    setErrorMessage(signUpResponse.error.message || "An error occurred");
+    console.log("signUpResponse_error", signUpResponse.error);
+  }
+  console.log(signUpResponse);
+};
+  
   //   const { handleLogin } = React.useContext(AuthenticatedContext);
 
   //   const handleFormSubmit = (e) => {
