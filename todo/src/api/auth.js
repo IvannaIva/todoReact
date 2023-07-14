@@ -46,6 +46,17 @@ export async function confirmSignUp(username, code) {
     }
 }
 
+export async function resendConfirmationCode(username) {
+    try {
+        await Auth.resendSignUp(username);
+        console.log('Code resent successfully');
+        return getSuccessfulResponse();
+    } catch (error) {
+        console.log('Error resending code: ', error);
+        return getErrorResponse(error);
+    }
+}
+
 export async function signIn(username, password) {
     try {
         const user = await Auth.signIn(username, password);

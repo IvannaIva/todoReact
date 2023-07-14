@@ -4,7 +4,7 @@ import styles from "./EmailPasForm.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AuthenticatedContext } from "../../App";
-import { signUp, confirmSignUp } from "../../api/auth";
+import { signUp, confirmSignUp, resendConfirmationCode } from "../../api/auth";
 import { useState } from "react";
 import { loginSuccess } from "../../store/loginSlice";
 import { useForm } from "react-hook-form";
@@ -40,6 +40,11 @@ export default function ConfirmSignUpForm() {
     }
   };
 
+
+  const handleResendCode = () => {
+    resendConfirmationCode(email);
+  };
+
   return (
     <div className={styles.email_pas_form}>
       <h2>Ваш код підтвердження</h2>
@@ -65,6 +70,9 @@ export default function ConfirmSignUpForm() {
         </div>
         <Button className={styles.customButton}>Відправити</Button>
       </Form>
+     
+        <span onClick={handleResendCode}>resend code</span>
+      
     </div>
   );
 }
