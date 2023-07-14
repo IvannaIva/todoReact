@@ -13,7 +13,8 @@ function NoAuthorized() {
       <Routes>
         <Route  path="/" element={<LoginPage/>} />
         <Route  path="/signup" element={<SignupForm/>} />
-        <Route  path="/confirm" element={<ConfirmSignUpForm/>} />
+        <Route path="/confirm-signup/:email" element={<ConfirmSignUpForm />} />
+  
       </Routes>
  
   );

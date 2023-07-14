@@ -30,8 +30,8 @@ export default function SignupForm() {
   console.log("userDate", userDate);
   const signUpResponse = await signUp(userDate.email, userDate.password);
   if (signUpResponse.isSuccess) {
-    //dispatch(loginSuccess());
-    navigate("/confirm");
+    
+    navigate(`/confirm-signup/${userDate.email}`);
     console.log("signUpResponse.data", signUpResponse.userDate);
   } else {
     setErrorMessage(signUpResponse.error.message || "An error occurred");

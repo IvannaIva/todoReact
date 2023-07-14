@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import styles from "./EmailPasForm.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AuthenticatedContext } from "../../App";
 import { signUp, confirmSignUp } from "../../api/auth";
@@ -13,6 +13,7 @@ export default function ConfirmSignUpForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
+  const { email } = useParams();
 
   const {
     register,
@@ -26,7 +27,7 @@ export default function ConfirmSignUpForm() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const response = await confirmSignUp(data.confirmSignUp);
+    const response = await confirmSignUp(email, data.confirmSignUp);
     if (response.isSuccess) {
       console.log("Confirmation successful");
       dispatch(loginSuccess());
