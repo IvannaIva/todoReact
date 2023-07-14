@@ -8,14 +8,28 @@ import { Amplify } from "aws-amplify";
 import { Auth } from "aws-amplify";
 import { loginSuccess, logout } from "./store/loginSlice";
 
+
 Amplify.configure({
   Auth: {
     region: "eu-west-1",
-    userPoolId: "eu-west-1_NtYADw6iB",
-    userPoolWebClientId: "6p77ar4vnpnpvn6efvqlca6od9",
+    userPoolId: "eu-west-1_X10xXNwCX",
+    userPoolWebClientId: "72v974hgfhjukp4lvtllk5hlmk",
     mandatorySignIn: true,
   },
 });
+
+
+// Amplify.configure({
+//   Auth: {
+//     region: "eu-west-1",
+//     userPoolId: "eu-west-1_NtYADw6iB",
+//     userPoolWebClientId: "6p77ar4vnpnpvn6efvqlca6od9",
+//     mandatorySignIn: true,
+//   },
+// });
+
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +53,7 @@ function App() {
       }
     } catch (error) {
       console.log("No active session");
+      dispatch(logout());
     }
   }
 

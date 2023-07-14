@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import LoginPage from "./LoginPage";
 import { Route, Routes } from "react-router-dom";
 import "../components/styles/App.css";

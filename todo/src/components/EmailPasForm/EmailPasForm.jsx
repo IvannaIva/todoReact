@@ -17,7 +17,7 @@ export default function EmailPasForm() {
     register,
     formState: { errors },
     handleSubmit,
-    setError,
+   
   } = useForm({
     defaultValues: {
       email: "",
