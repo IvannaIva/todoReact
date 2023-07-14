@@ -20,33 +20,34 @@ export default function SignupForm() {
     handleSubmit,
   } = useForm();
 
-  const onSubmitSignup = (data) => console.log(data);
+  const { ref: emailRef, ...registerEmail } = register("email");
+  const { ref: passwordRef, ...registerPassword } = register("password");
+  const { ref: confirmPasswordRef, ...registerСonfirmPassword } = register(
+    "confirmPassword"
+  );
 
 
+  const onSubmitSignup = async (userDate) => {
+    console.log("userDate", userDate);
+    const response = await signUp(userDate.email, userDate.password, userDate.confirmPassword);
+    if (response.isSuccess) {
+      dispatch(loginSuccess());
+      navigate("/");
+      console.log("response.data", response.userDate);
+    } else {
+      setErrorMessage(response.error.message || "An error occurred");
+      console.log("response_error", response.error);
+    }
+    console.log(response);
+  };
 
+  //   const { handleLogin } = React.useContext(AuthenticatedContext);
 
-// const onSubmitSignup = async (userDate) => {
-//   console.log("userDate", userDate);
-//   const response = await signUp(userDate.username, userDate.password);
-//   if (response.isSuccess) {
-//     dispatch(loginSuccess());
-//     navigate("/");
-//     console.log("response.data", response.userDate);
-//   } else {
-//     setErrorMessage(response.error.message || "An error occurred");
-//     console.log("response_error", response.error);
-//   }
-//   console.log(response);
-// };
-
-//   const { handleLogin } = React.useContext(AuthenticatedContext);
-
-//   const handleFormSubmit = (e) => {
-//     e.preventDefault();
-//     handleLogin(e);
-//     navigate("/home");
-//   };
-
+  //   const handleFormSubmit = (e) => {
+  //     e.preventDefault();
+  //     handleLogin(e);
+  //     navigate("/home");
+  //   };
 
   return (
     <div className={styles.email_pas_form}>
@@ -62,7 +63,8 @@ export default function SignupForm() {
             name="email"
             placeholder="Email"
             type="email"
-            {...register("email")}
+            innerRef={emailRef}
+            {...registerEmail}
           />
         </FormGroup>{" "}
         <FormGroup>
@@ -74,7 +76,8 @@ export default function SignupForm() {
             name="password"
             placeholder="Password"
             type="password"
-            {...register("password")}
+            innerRef={passwordRef}
+            {...registerPassword}
           />
         </FormGroup>{" "}
         <FormGroup>
@@ -86,7 +89,8 @@ export default function SignupForm() {
             name="confirmPassword"
             placeholder="Confirm Password"
             type="password"
-            {...register("confirmPassword")}
+            innerRef={confirmPasswordRef}
+            {...registerСonfirmPassword}
           />
         </FormGroup>{" "}
         <Button className={styles.customButton}>Signup</Button>

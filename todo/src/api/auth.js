@@ -12,7 +12,7 @@ export const getErrorResponse = (error) => ({
     error: error,
 });
 
-export async function signUp(password, username) {
+export async function signUp(username, password) {
     try {
         const { user } = await Auth.signUp({
             username,
