@@ -35,6 +35,17 @@ export async function signUp(username, password) {
     }
 }
 
+export async function confirmSignUp(username, code) {
+    try {
+        await Auth.confirmSignUp(username, code, { forceAliasCreation: false });
+        console.log("Registration confirmed successfully.");
+        return getSuccessfulResponse();
+    } catch (error) {
+        console.log("Error confirming sign up:", error);
+        return getErrorResponse(error);
+    }
+}
+
 export async function signIn(username, password) {
     try {
         const user = await Auth.signIn(username, password);

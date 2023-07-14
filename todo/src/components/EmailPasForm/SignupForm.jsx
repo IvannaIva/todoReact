@@ -4,7 +4,7 @@ import styles from "./EmailPasForm.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AuthenticatedContext } from "../../App";
-import { signUp } from "../../api/auth";
+import { signUp, confirmSignUp } from "../../api/auth";
 import { useState } from "react";
 import { loginSuccess } from "../../store/loginSlice";
 import { useForm } from "react-hook-form";
@@ -26,19 +26,34 @@ export default function SignupForm() {
     "confirmPassword"
   );
 
-
   const onSubmitSignup = async (userDate) => {
     console.log("userDate", userDate);
-    const response = await signUp(userDate.email, userDate.password, userDate.confirmPassword);
-    if (response.isSuccess) {
-      dispatch(loginSuccess());
-      navigate("/");
-      console.log("response.data", response.userDate);
+    const signUpResponse = await signUp(userDate.email, userDate.password);
+    if (signUpResponse.isSuccess) {
+      console.log("Registration successful");
+
+      // Виклик функції підтвердження
+      const confirmResponse = await confirmSignUp(
+        userDate.email,
+        userDate.confirmationCode
+      );
+      if (confirmResponse.isSuccess) {
+        console.log("Confirmation successful");
+        dispatch(loginSuccess());
+        navigate("/");
+      } else {
+        setErrorMessage(
+          confirmResponse.error.message ||
+            "An error occurred during confirmation"
+        );
+        console.log("Confirmation error:", confirmResponse.error);
+      }
     } else {
-      setErrorMessage(response.error.message || "An error occurred");
-      console.log("response_error", response.error);
+      setErrorMessage(
+        signUpResponse.error.message || "An error occurred during registration"
+      );
+      console.log("Registration error:", signUpResponse.error);
     }
-    console.log(response);
   };
 
   //   const { handleLogin } = React.useContext(AuthenticatedContext);
@@ -93,6 +108,9 @@ export default function SignupForm() {
             {...registerСonfirmPassword}
           />
         </FormGroup>{" "}
+        <div className={styles.error_wrong}>
+          {errorMessage && <p>{errorMessage}</p>}
+        </div>
         <Button className={styles.customButton}>Signup</Button>
         <p>
           Already have an account?{" "}
