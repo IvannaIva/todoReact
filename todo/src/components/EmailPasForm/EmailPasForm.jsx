@@ -4,7 +4,7 @@ import styles from "./EmailPasForm.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { signIn } from "../../api/auth";
+import { signIn, checkIfUserConfirmed, resendConfirmationCode } from "../../api/auth";
 import { useState } from "react";
 import { loginSuccess } from "../../store/loginSlice";
 
@@ -28,17 +28,26 @@ export default function EmailPasForm() {
 
   const onSubmit = async (data) => {
     console.log("data", data);
-    const response = await signIn(data.email, data.password);
-    if (response.isSuccess) {
-      dispatch(loginSuccess());
-      navigate("/");
-      console.log("response.data", response.data);
+    const isConfirmed = await checkIfUserConfirmed(data.email);
+    if (isConfirmed) {
+      // Якщо користувач підтвердив обліковий запис, виконати логін
+      const response = await signIn(data.email, data.password);
+      if (response.isSuccess) {
+        dispatch(loginSuccess());
+        navigate("/");
+        console.log("Login successful");
+      } else {
+        setErrorMessage(response.error.message || "An error occurred during login");
+        console.log("Login error:", response.error);
+      }
     } else {
-      setErrorMessage(response.error.message || "An error occurred");
-      console.log("response_error", response.error);
+      // Якщо користувач не підтвердив обліковий запис, відправити код підтвердження знову
+      await resendConfirmationCode(data.email);
+      setErrorMessage("Please confirm your account by entering the verification code.");
     }
-    console.log(response);
   };
+
+
 
   const { ref: emailRef, ...registerEmail } = register("email", {
     required: "Email is required",
