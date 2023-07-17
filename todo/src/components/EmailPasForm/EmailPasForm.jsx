@@ -1,10 +1,14 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import styles from "./EmailPasForm.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { signIn, checkIfUserConfirmed, resendConfirmationCode } from "../../api/auth";
+import {
+  signIn,
+  checkIfUserConfirmed,
+  resendConfirmationCode,
+} from "../../api/auth";
 import { useState } from "react";
 import { loginSuccess } from "../../store/loginSlice";
 
@@ -12,12 +16,12 @@ export default function EmailPasForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
+  const { email } = useParams();
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-   
   } = useForm({
     defaultValues: {
       email: "",
@@ -37,17 +41,21 @@ export default function EmailPasForm() {
         navigate("/");
         console.log("Login successful");
       } else {
-        setErrorMessage(response.error.message || "An error occurred during login");
+        setErrorMessage(
+          response.error.message || "An error occurred during login"
+        );
         console.log("Login error:", response.error);
       }
     } else {
       // Якщо користувач не підтвердив обліковий запис, відправити код підтвердження знову
+      navigate(`/confirm-signup/${data.email}`);
+
       await resendConfirmationCode(data.email);
-      setErrorMessage("Please confirm your account by entering the verification code.");
+      setErrorMessage(
+        "Please confirm your account by entering the verification code."
+      );
     }
   };
-
-
 
   const { ref: emailRef, ...registerEmail } = register("email", {
     required: "Email is required",
@@ -69,10 +77,13 @@ export default function EmailPasForm() {
             Email
           </Label>
           <Input
-            type="tel" id="phone" name="phone"
-            placeholder="Tel"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
             innerRef={emailRef}
             {...registerEmail}
+           // value={email}
           />
           <div className={styles.error_wrong}>
             {errors.email && <p>{errors.email.message}</p>}

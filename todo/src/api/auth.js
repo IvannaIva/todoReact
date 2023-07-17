@@ -56,7 +56,7 @@ export async function checkIfUserConfirmed(email) {
         if (userData.UserConfirmed) {
             getSuccessfulResponse(userData) // Обліковий запис підтверджено
         } else {
-            return getErrorResponse(); // Обліковий запис не підтверджено
+            return getSuccessfulResponse(); // Обліковий запис не підтверджено
         }
     } catch (error) {
         console.log('Error checking confirmation status:', error);
