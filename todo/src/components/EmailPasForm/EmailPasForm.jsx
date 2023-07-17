@@ -32,28 +32,29 @@ export default function EmailPasForm() {
 
   const onSubmit = async (data) => {
     console.log("data", data);
-    const isConfirmed = await checkIfUserConfirmed(data.email);
-    if (isConfirmed) {
-      // Якщо користувач підтвердив обліковий запис, виконати логін
+    try {
       const response = await signIn(data.email, data.password);
       if (response.isSuccess) {
         dispatch(loginSuccess());
         navigate("/");
         console.log("Login successful");
       } else {
-        setErrorMessage(
-          response.error.message || "An error occurred during login"
-        );
-        console.log("Login error:", response.error);
+        const { error } = response;
+        console.log("Login error:", error);
+        if (error.code === "UserNotConfirmedException") {
+          // Якщо користувач не підтвердив обліковий запис, відправити код підтвердження знову
+          navigate(`/confirm-signup/${data.email}`);
+          await resendConfirmationCode(data.email);
+          setErrorMessage(
+            "Please confirm your account by entering the verification code."
+          );
+        } else {
+          setErrorMessage(error.message || "An error occurred during login");
+        }
       }
-    } else {
-      // Якщо користувач не підтвердив обліковий запис, відправити код підтвердження знову
-      navigate(`/confirm-signup/${data.email}`);
-
-      await resendConfirmationCode(data.email);
-      setErrorMessage(
-        "Please confirm your account by entering the verification code."
-      );
+    } catch (error) {
+      console.log("Login error:", error);
+      setErrorMessage("An error occurred during login");
     }
   };
 
@@ -83,7 +84,7 @@ export default function EmailPasForm() {
             placeholder="Email"
             innerRef={emailRef}
             {...registerEmail}
-           // value={email}
+            // value={email}
           />
           <div className={styles.error_wrong}>
             {errors.email && <p>{errors.email.message}</p>}
