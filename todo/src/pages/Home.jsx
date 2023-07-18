@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import { TodoList } from "../components/TodoList/TodoList";
 import TodoForm from "../components/TodoForm/TodoForm";
+import UserNamePage from "../components/UserName/UserName";
 
 import MyButton from "../components/button/MyButton";
 import { useNavigate } from "react-router-dom";
@@ -31,6 +32,7 @@ function Home() {
       <div className="loginout-button">
         <MyButton onClick={handleLogoutButton}>loginout</MyButton>
       </div>
+      <UserNamePage/>
       <TodoForm />
 
       <TodoList title="Список справ !" />
