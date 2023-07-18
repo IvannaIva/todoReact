@@ -40,36 +40,15 @@ export default function ConfirmSignUpForm() {
     }
   };
 
-  // const handleResendCode = async () => {
-  //   try {
-  //    await resendConfirmationCode(email);
-  //     console.log("Code resent successfully");
-  //   } catch (error) {
-  //     console.log("Login error:", error);
-  //     if (error.code === "LimitExceededException") {
-  //       setErrorMessage("Attempt limit exceeded, please try after some time.");
-  //     } else {
-  //       console.log("Resend code error:", error);
-  //       setErrorMessage("An error occurred while resending the code. Please try again later.");
-  //     }
-  //   }
-  // };
-
   const handleResendCode = async (data) => {
     console.log("data", data);
-    try {
-      const response = await resendConfirmationCode(email);
 
-      const { error } = response;
-      console.log("Login error:", error);
-      if (error && error.code === "LimitExceededException") {
-        setErrorMessage("Attempt limit exceeded, please try after some time.");
-      }
-    } catch (error) {
-      console.log("Login error:", error);
-      setErrorMessage(
-        "An error occurred while resending the code. Please try again later."
-      );
+    const response = await resendConfirmationCode(email);
+
+    const { error } = response;
+    console.log("Login error:", error);
+    if (error && error.code === "LimitExceededException") {
+      setErrorMessage("Attempt limit exceeded, please try after some time.");
     }
   };
 
