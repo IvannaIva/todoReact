@@ -46,32 +46,13 @@ export async function confirmSignUp(username, code) {
     }
 }
 
-
-
-export async function checkIfUserConfirmed(email) {
-    try {
-        const userData = await Auth.confirmSignUp(email);
-
-        // Перевірити статус підтвердження облікового запису
-        if (userData.UserConfirmed) {
-            getSuccessfulResponse(userData) // Обліковий запис підтверджено
-        } else {
-            return getSuccessfulResponse(); // Обліковий запис не підтверджено
-        }
-    } catch (error) {
-        console.log('Error checking confirmation status:', error);
-        return getErrorResponse(error); // Помилка при перевірці статусу підтвердження
-    }
-};
-
-
 export async function resendConfirmationCode(username) {
     try {
         await Auth.resendSignUp(username);
-        console.log('Code resent successfully');
+        console.log("Code resent successfully");
         return getSuccessfulResponse();
     } catch (error) {
-        console.log('Error resending code: ', error);
+        console.log("Error resending code: ", error);
         return getErrorResponse(error);
     }
 }

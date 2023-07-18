@@ -4,11 +4,7 @@ import styles from "./EmailPasForm.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import {
-  signIn,
-  checkIfUserConfirmed,
-  resendConfirmationCode,
-} from "../../api/auth";
+import { signIn, resendConfirmationCode } from "../../api/auth";
 import { useState } from "react";
 import { loginSuccess } from "../../store/loginSlice";
 
