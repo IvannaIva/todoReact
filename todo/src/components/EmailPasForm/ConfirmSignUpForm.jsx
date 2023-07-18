@@ -45,10 +45,14 @@ export default function ConfirmSignUpForm() {
 
     const response = await resendConfirmationCode(email);
 
-    const { error } = response;
-    console.log("Login error:", error);
-    if (error && error.code === "LimitExceededException") {
-      setErrorMessage("Attempt limit exceeded, please try after some time.");
+    if (response.isSuccess) {
+      alert("Code sent again");
+    } else {
+      setErrorMessage(
+        response.error.message ||
+          "An error occurred while resending the code. Please try again later."
+      );
+      console.log("Confirmation error:", response.error);
     }
   };
 

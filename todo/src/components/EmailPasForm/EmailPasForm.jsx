@@ -26,33 +26,32 @@ export default function EmailPasForm() {
     mode: "onBlur",
   });
 
+
   const onSubmit = async (data) => {
     console.log("data", data);
-    try {
-      const response = await signIn(data.email, data.password);
-      if (response.isSuccess) {
-        dispatch(loginSuccess());
-        navigate("/");
-        console.log("Login successful");
-      } else {
-        const { error } = response;
-        console.log("Login error:", error);
-        if (error.code === "UserNotConfirmedException") {
-          // Якщо користувач не підтвердив обліковий запис, відправити код підтвердження знову
-          navigate(`/confirm-signup/${data.email}`);
-          await resendConfirmationCode(data.email);
-          setErrorMessage(
-            "Please confirm your account by entering the verification code."
-          );
-        } else {
-          setErrorMessage(error.message || "An error occurred during login");
-        }
-      }
-    } catch (error) {
+  
+    const response = await signIn(data.email, data.password);
+    if (response.isSuccess) {
+      dispatch(loginSuccess());
+      navigate("/");
+      console.log("Login successful");
+    } else {
+      const { error } = response;
       console.log("Login error:", error);
-      setErrorMessage("An error occurred during login");
+      if (error.code === "UserNotConfirmedException") {
+        // Якщо користувач не підтвердив обліковий запис, відправити код підтвердження знову
+        navigate(`/confirm-signup/${data.email}`);
+        await resendConfirmationCode(data.email);
+        setErrorMessage(
+          "Please confirm your account by entering the verification code."
+        );
+      } else {
+        setErrorMessage(error.message || "An error occurred during login");
+      }
     }
   };
+  
+
 
   const { ref: emailRef, ...registerEmail } = register("email", {
     required: "Email is required",
