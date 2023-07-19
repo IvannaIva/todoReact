@@ -30,21 +30,27 @@ export default function EmailPasForm() {
   const onSubmit = async (data) => {
     console.log("data", data);
   
-    const response = await signIn(data.email, data.password);
-    if (response.isSuccess) {
+    const loginResponse = await signIn(data.email, data.password);
+    if (loginResponse.isSuccess) {
       dispatch(loginSuccess());
       navigate("/");
       console.log("Login successful");
     } else {
-      const { error } = response;
+      const { error } = loginResponse;
       console.log("Login error:", error);
       if (error.code === "UserNotConfirmedException") {
-        // Якщо користувач не підтвердив обліковий запис, відправити код підтвердження знову
-        navigate(`/confirm-signup/${data.email}`);
-        await resendConfirmationCode(data.email);
-        setErrorMessage(
-          "Please confirm your account by entering the verification code."
-        );
+        const resendResponse = await resendConfirmationCode(data.email);
+        if (resendResponse.isSuccess) {
+          navigate(`/confirm-signup/${data.email}`);
+          setErrorMessage(
+            "Please confirm your account by entering the verification code."
+          );
+        } else {
+          const { error: resendError } = resendResponse;
+          setErrorMessage(
+            resendError.message || "An error occurred during login"
+          );
+        }
       } else if (error.code === "LimitExceededException") {
         setErrorMessage("Attempt limit exceeded, please try again later.");
       } else {
@@ -53,8 +59,34 @@ export default function EmailPasForm() {
     }
   };
   
+
   
 
+  // const onSubmit = async (data) => {
+  //   console.log("data", data);
+  
+  //   const response = await signIn(data.email, data.password);
+  //   if (response.isSuccess) {
+  //     dispatch(loginSuccess());
+  //     navigate("/");
+  //     console.log("Login successful");
+  //   } else {
+  //     const { error } = response;
+  //     console.log("Login error:", error);
+  //     if (error.code === "LimitExceededException") {
+  //       setErrorMessage("Attempt limit exceeded, please try again later.");
+  //     } else if (error.code === "UserNotConfirmedException") {
+  //       await resendConfirmationCode(data.email); // Відправити код підтвердження знову
+  //       navigate(`/confirm-signup/${data.email}`);
+  //       setErrorMessage(
+  //         "Please confirm your account by entering the verification code."
+  //       );
+  //     } else {
+  //       setErrorMessage(error.message || "An error occurred during login");
+  //     }
+  //   }
+  // };
+  
   
 
 

@@ -56,16 +56,23 @@ export async function resendConfirmationCode(username) {
         return getErrorResponse(error);
     }
 }
-
 export async function signIn(username, password) {
     try {
         const user = await Auth.signIn(username, password);
         return getSuccessfulResponse(user);
     } catch (error) {
         console.log("error signing in", error);
-        return getErrorResponse(error);
+        if (error.code === "LimitExceededException") {
+            return getErrorResponse({
+                code: "LimitExceededException",
+                message: "Attempt limit exceeded, please try again later.",
+            });
+        } else {
+            return getErrorResponse(error);
+        }
     }
 }
+
 
 export async function signOut() {
     try {
