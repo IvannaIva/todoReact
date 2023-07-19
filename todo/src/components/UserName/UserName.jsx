@@ -10,7 +10,6 @@ function UserNamePage() {
 
   const handleEditName = () => {
     setEditMode(true);
- 
   };
 
   const handleSaveName = () => {
@@ -26,9 +25,10 @@ function UserNamePage() {
     <div>
       <h1>Hello, {name}</h1>
 
-
       {!editMode ? (
-        <button onClick={handleEditName}>{name ? "Edit name" : "Add name"}</button>
+        <button onClick={handleEditName}>
+          {name ? "Edit name" : "Add name"}
+        </button>
       ) : (
         <div>
           <input type="text" value={newName} onChange={handleChangeName} />

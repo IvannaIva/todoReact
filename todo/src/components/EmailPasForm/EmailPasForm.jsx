@@ -45,11 +45,16 @@ export default function EmailPasForm() {
         setErrorMessage(
           "Please confirm your account by entering the verification code."
         );
+      } else if (error.code === "LimitExceededException") {
+        setErrorMessage("Attempt limit exceeded, please try again later.");
       } else {
         setErrorMessage(error.message || "An error occurred during login");
       }
     }
   };
+  
+  
+
   
 
 

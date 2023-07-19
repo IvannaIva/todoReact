@@ -12,8 +12,8 @@ import { loginSuccess, logout } from "./store/loginSlice";
 Amplify.configure({
   Auth: {
     region: "eu-west-1",
-    userPoolId: "eu-west-1_X10xXNwCX",
-    userPoolWebClientId: "72v974hgfhjukp4lvtllk5hlmk",
+    userPoolId: "eu-west-1_KGw92t7wL",
+    userPoolWebClientId: "p9d9fui41efv0hj0a5q0mssvf",
     mandatorySignIn: true,
   },
 });
