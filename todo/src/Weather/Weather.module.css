@@ -1,0 +1,9 @@
+.weather {
+    width: 800px;
+}
+
+.error_wrong p {
+    margin: 0;
+    text-align: left;
+    color: red;
+}

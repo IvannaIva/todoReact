@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../store/loginSlice";
 import { signOut } from "../api/auth";
 
-function Home() {
+function TodoPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -40,4 +40,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default TodoPage;

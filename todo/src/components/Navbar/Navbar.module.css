@@ -1,0 +1,23 @@
+/* Navbar.module.css */
+
+.navbar {
+    background-color: rgb(240, 227, 227);
+    padding: 10px;
+}
+
+.navbar nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.navbar nav a.activeLink {
+    font-weight: bold;
+    background-color: rgb(106, 172, 104);
+}

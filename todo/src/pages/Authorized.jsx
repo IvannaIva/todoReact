@@ -1,16 +1,24 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import { useNavigate } from "react-router-dom";
+import TodoPage from "../pages/TodoPage"
+
 import "../components/styles/App.css";
-import LoginPage from "./LoginPage";
+import WeatherPage from "../Weather/WeatherPage"
+import Navbar from "../components/Navbar/Navbar"
 
 const Authorized = () => {
+
   return (
+    <div>
+    {/* Навігація між "Todo" та "Weather" */}
+   <Navbar/>
+
+    {/* Роутинг */}
     <Routes>
-      <Route path="/" element={<Home />} />
-      {/* <Route  path="/login" element={<LoginPage/>} /> */}
+      <Route path="/" element={<TodoPage />} />
+      <Route path="/weather" element={<WeatherPage />} />
     </Routes>
+  </div>
   );
 };
 
