@@ -26,10 +26,12 @@ function WeatherPage() {
       });
   };
   return (
-    <div className={styles.weather}>
-      <h1>React Weather</h1>
-      <WeatherInput onSearch={handleWeatherSearch} />
-      <WeatherDisplay weatherData={weatherData} />
+    <div className={styles.wrapper}>
+      <div className={styles.weather}>
+        <h1>React Weather</h1>
+        <WeatherInput onSearch={handleWeatherSearch} />
+        <WeatherDisplay weatherData={weatherData} />
+      </div>
     </div>
   );
 }

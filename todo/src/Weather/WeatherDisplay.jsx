@@ -1,13 +1,14 @@
 import React from "react";
+import CurrentWeather from './CurrentWeather/CurrentWeather'
+import ExtendedForecast from './ExtendedForecast/ExtendedForecast'
 
 const WeatherDisplay = ({ weatherData }) => {
   return (
     <div>
       {weatherData ? (
         <div>
-          <h2>{weatherData.location.name}</h2>
-          <p>{weatherData.current.temp_c}°C</p>
-          <p>{weatherData.current.condition.text}</p>
+          <CurrentWeather weatherData ={ weatherData }/>
+          <ExtendedForecast weatherData ={ weatherData }/>
         </div>
       ) : (
         <p>Loading weather data...</p>

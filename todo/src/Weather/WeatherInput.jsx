@@ -1,8 +1,16 @@
 import React from "react";
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  InputGroupText,
+  InputGroup,
+} from "reactstrap";
 import styles from "./Weather.module.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { VscSearch } from "react-icons/vsc";
 
 function WeatherInput({ onSearch }) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,20 +30,25 @@ function WeatherInput({ onSearch }) {
   };
 
   return (
-    <div>
+    <div className={styles.form_input_weather}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <Label for="exampleEmail" hidden>
             ConfirmSignUp
           </Label>
-          <Input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="city"
-            innerRef={weatherInputCityRef}
-            {...registerWeatherInputCity}
-          />
+          <InputGroup>
+            <InputGroupText>
+              <VscSearch className={styles.searchIcon} />
+            </InputGroupText>
+            <Input
+              type="search"
+              id="name"
+              name="name"
+              placeholder="city"
+              innerRef={weatherInputCityRef}
+              {...registerWeatherInputCity}
+            />
+          </InputGroup>
           <div className={styles.error_wrong}>
             {/* {errors.email && <p>{errors.email.message}</p>} */}
           </div>
