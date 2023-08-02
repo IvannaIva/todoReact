@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const ExtendedForecast = ({ weatherData }) => {
-  
+  // console.log("Temperature:", weatherData.forecast.forecastday);
   const getDayOfWeek = (dateStr) => {
     const date = new Date(dateStr);
 
@@ -31,7 +31,10 @@ const ExtendedForecast = ({ weatherData }) => {
       <div className={styles.extended_weather_wrapper}>
         <p className={styles.title_group}> Extended Forecast</p>
         <div className={styles.extended_weat_info_week}>
-         { weatherData.forecast.forecastday.map((day) => (
+          {weatherData &&
+          weatherData.forecast &&
+          weatherData.forecast.forecastday
+            ? weatherData.forecast.forecastday.map((day) => (
                 <WeekDay
                   key={day.date_epoch}
                   nameDay={getDayOfWeek(day.date)}
@@ -39,7 +42,7 @@ const ExtendedForecast = ({ weatherData }) => {
                   temperature={day.day.maxtemp_c}
                 />
               ))
-         }
+            : null}
         </div>
       </div>
     </>
