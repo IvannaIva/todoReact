@@ -1,18 +1,19 @@
 import React from "react";
-import CurrentWeather from './CurrentWeather/CurrentWeather'
-import ExtendedForecast from './ExtendedForecast/ExtendedForecast'
+import CurrentWeather from "./CurrentWeather/CurrentWeather";
+import ExtendedForecast from "./ExtendedForecast/ExtendedForecast";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
-const WeatherDisplay = ({ weatherData }) => {
+const WeatherDisplay = ({ weatherData, searching }) => {
   return (
     <div>
-      {weatherData ? (
+      {searching ? (
+        <LoadingSpinner />
+      ) : weatherData ? (
         <div>
-          <CurrentWeather weatherData ={ weatherData }/>
-          <ExtendedForecast weatherData ={ weatherData }/>
+          <CurrentWeather weatherData={weatherData} />
+          <ExtendedForecast weatherData={weatherData} />
         </div>
-      ) : (
-        <p>Loading weather data...</p>
-      )}
+      ) : null}
     </div>
   );
 };

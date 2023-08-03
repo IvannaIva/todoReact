@@ -12,10 +12,13 @@ import {
 import storage from "reduxjs-toolkit-persist/lib/storage";
 import authReducer from "./loginSlice";
 import todoReducer from "./todoSlice";
+import weatherReducer from "./weatherSlice";
+
 
 const rootReducer = combineReducers({
     auth: authReducer,
     todos: todoReducer,
+    weather: weatherReducer,
 });
 
 const persistConfig = {

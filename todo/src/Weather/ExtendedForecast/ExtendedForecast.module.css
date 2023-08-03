@@ -1,23 +1,48 @@
-.extended_weather_wrapper {
-    width: 700px;
-    height: 200px;
-    background: #ffffff;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 20px;
-    margin-top: 20px;
-}
-
-.title_group {
-    text-align: start;
-    color: #9b9090;
-    padding-top: 20px;
-    padding-left: 15px;
-    font-weight: bold;
-}
-
-.extended_weat_info_day {
-    background: #9b9090;
-    height: 200px;
-}
+    .extended_weather_wrapper {
+        width: 800px;
+        height: 250px;
+        background: #ffffff;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
+        margin-top: 20px;
+    }
+    
+    .title_group {
+        text-align: start;
+        color: #9b9090;
+        padding-top: 20px;
+        padding-left: 15px;
+        font-weight: bold;
+    }
+    
+    .extended_weat_info_week {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 20px;
+    }
+    /* .extended_weat_info_day {
+        height: 150px;
+    } */
+    
+    .extended_weat_info_day h3 {
+        font-size: 18px;
+        font-weight: bold;
+        color: rgb(42, 135, 197);
+    }
+    
+    .extended_weat_condition {
+        width: 70px;
+        height: 40px;
+        font-size: 12px;
+        font-weight: bold;
+        color: rgb(12, 63, 97);
+    }
+    
+    .extended_weat_info_day p {
+        color: rgb(12, 63, 97);
+    }

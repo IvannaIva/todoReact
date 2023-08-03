@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../CurrentWeather/CurrentWeather.module.css";
 import TemperatureWithArrow from "./TemperatureWithArrow";
 import WeatherInfoRow from "./WeatherInfoRow";
-import GroupName from "../Applications/GroupName";
+
 import {
   faWind,
   faTint,
@@ -15,6 +15,7 @@ const CurrentWeather = ({ weatherData }) => {
   
   return (
     <>
+     {weatherData && weatherData.location ? (
       <div className={styles.current_weather_wrapper}>
         <p className={styles.title_group}> Current Weather</p>
         <div className={styles.current_weat_info}>
@@ -73,6 +74,9 @@ const CurrentWeather = ({ weatherData }) => {
           </div>
         </div>
       </div>
+      ) : (
+        <p>Loading current weather data...</p>
+      )}
     </>
   );
 };
